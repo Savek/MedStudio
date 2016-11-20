@@ -1,0 +1,31 @@
+.container-fluid.top-menu {
+    background-color: #1B2024;
+    height: 70px;
+    padding-top: 15px;
+    padding-bottom: 20px;
+}
+
+.container-fluid.top-menu .navbar-header {
+    margin-left: 20%;
+    color: #fff;
+    padding: 10px 15px;
+}
+
+.container-fluid.top-menu ul.nav {
+    background-color: transparent;
+    color: #fff;
+    text-transform: uppercase;
+    float: right;
+    margin-right: 20%;
+}
+
+.container-fluid.top-menu ul.nav li a{
+    color: #fff;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.container-fluid.top-menu ul.nav li a:hover{
+    color: #58a554;
+    background-color: transparent;
+}

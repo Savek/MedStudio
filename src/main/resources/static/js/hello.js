@@ -1,4 +1,4 @@
-angular.module('hello', [ 'ngRoute' ])
+angular.module('main', [ 'ngRoute' ])
     .config(function($routeProvider, $httpProvider) {
 
         $routeProvider.when('/', {
@@ -24,19 +24,13 @@ angular.module('hello', [ 'ngRoute' ])
     })
     .controller('navigation', function($rootScope, $http, $location) {
 
-        var self = this
+        var self = this;
         self.tab = function(route) {
             return $route.current && route === $route.current.controller;
         };
 
         var authenticate = function(credentials, callback) {
 
-            var headers = credentials ? {
-                authorization : "Basic "
-                + btoa(credentials.username + ":"
-                    + credentials.password)
-
-            } : {};
             var data = "";
             if (credentials) {
                 data = "username="+credentials.username+"&password="+credentials.password+"&submit=Login";
@@ -61,6 +55,7 @@ angular.module('hello', [ 'ngRoute' ])
                         $rootScope.authenticated = false;
                     }
                     callback && callback($rootScope.authenticated);
+
                 }, function() {
                     $rootScope.authenticated = false;
                     $location.path("/login");
@@ -80,12 +75,10 @@ angular.module('hello', [ 'ngRoute' ])
         self.login = function() {
             authenticate(self.credentials, function(authenticated) {
                 if (authenticated) {
-                    console.log("Login succeeded")
                     $location.path("/");
                     self.error = false;
                     $rootScope.authenticated = true;
                 } else {
-                    console.log("Login failed")
                     $location.path("/login");
                     self.error = true;
                     $rootScope.authenticated = false;
