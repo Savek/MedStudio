@@ -2,3 +2,81 @@
 body {
     background-color: #2B3033;
 }
+
+/* welcome page */
+header {
+    background-image: url("../img/Big-Data-1.jpg");
+    background-position: center center;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    padding: 20% 0;
+}
+
+header .header-content {
+    text-align: center;
+}
+
+header .header-content h1 {
+    font-size: 65px;
+    font-weight: bold;
+    color: #fff;
+}
+
+header .header-content p {
+    color: #fff;
+    font-size: 16px;
+}
+
+header .header-content img {
+    margin: 20px auto;
+    display: block;
+    width: 70px;
+    height: 70px;
+    opacity: 0.4;
+}
+
+header .header-content i {
+    margin: 50px auto;
+    display: block;
+    width: 70px;
+    height: 70px;
+    opacity: 0.4;
+    font-size: 6em;
+}
+
+section {
+    padding: 100px 0;
+
+}
+
+#about {
+    background-color: #58a554;
+    box-shadow: 0 0 0 #fff inset, 0 0 55px #000;
+}
+
+#services {
+    color: #58a554;
+}
+
+#services hr {
+    width: 5%;
+    border: 1px solid #58a554;
+}
+
+#services .service-box {
+    padding: 5% 0;
+}
+
+#services .service-box i {
+    margin-bottom: 15px;
+    opacity: 0.4;
+    color: #000;
+    font-size: 5em;
+}
+
+#services .service-box p {
+    opacity: 0.4;
+    color: #000;
+    font-weight: bold;
+}
