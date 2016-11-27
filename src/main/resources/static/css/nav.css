@@ -3,6 +3,9 @@
     height: 70px;
     padding-top: 15px;
     padding-bottom: 20px;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
 }
 
 .container-fluid.top-menu .navbar-header {
@@ -17,6 +20,10 @@
     text-transform: uppercase;
     float: right;
     margin-right: 20%;
+}
+
+.container-fluid.top-menu ul.nav li{
+    float: left;
 }
 
 .container-fluid.top-menu ul.nav li a{

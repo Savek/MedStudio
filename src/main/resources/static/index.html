@@ -25,12 +25,13 @@
         MedStudio
     </div>
     <ul class="nav" role="tablist">
+        <li ng-show="!authenticated"><a href="#/">Home</a></li>
         <li ng-show="!authenticated"><a href="#/login">login</a></li>
-        <li ng-show="authenticated"><a href="#/login">admin</a></li>
+        <li ng-show="authenticated"><a href="#/admin">admin</a></li>
         <li ng-show="authenticated"><a href="" ng-click="nav.logout()">logout</a></li>
     </ul>
 </div>
-<div ng-view class="container">
+<div ng-view class="container view">
 
 </div>
 <script src="js/angular-bootstrap.js" type="text/javascript"></script>

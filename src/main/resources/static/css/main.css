@@ -3,9 +3,25 @@ body {
     background-color: #2B3033;
 }
 
+/* ANIMATION */
+div.view.ng-enter {
+    transition: 0.5s linear all;
+    opacity: 0;
+}
+
+div.view.ng-enter.ng-enter-active {
+    transition: 0.5s linear all;
+    opacity: 1;
+}
+
 /* welcome page */
+.container {
+    width: 100%;
+    padding: 0;
+}
+
 header {
-    background-image: url("../img/Big-Data-1.jpg");
+    background-image: url("");
     background-position: center center;
     background-size: cover;
     width: 100%;
