@@ -1,9 +1,11 @@
-angular.module('main', [ 'ngRoute', 'ngAnimate', 'ui.bootstrap' ])
+angular.module('main', [ 'ngRoute', 'ngAnimate' ])
     .config(function($routeProvider, $httpProvider) {
 
+        $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+        console.log('asdasdasd');
         $routeProvider.when('/', {
             templateUrl : 'home.html',
-            controller : 'home',
+            controller : 'navigation',
             controllerAs: 'controller'
         }).when('/login', {
             templateUrl : 'login.html',
@@ -15,8 +17,6 @@ angular.module('main', [ 'ngRoute', 'ngAnimate', 'ui.bootstrap' ])
             controllerAs: 'controller'
         }).otherwise('/');
 
-        $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
-
     }).controller('navigation',
     function($rootScope, $http, $location) {
 
@@ -27,8 +27,8 @@ angular.module('main', [ 'ngRoute', 'ngAnimate', 'ui.bootstrap' ])
         var authenticate = function(credentials, callback) {
 
             var headers = credentials ? {authorization : "Basic "
-            + btoa(credentials.username + ":" + credentials.password)
-            } : {};
+                                        + btoa(credentials.username + ":" + credentials.password )
+                                        } : {};
 
             $http.get('user', {headers : headers}).then(function(response) {
                 if (response.data.name) {
@@ -59,8 +59,9 @@ angular.module('main', [ 'ngRoute', 'ngAnimate', 'ui.bootstrap' ])
             });
         };
         self.logout = function() {
-            $http.post('logout', {}).finally(function () {
+            $http.post('/logout', {}).finally(function () {
                 $rootScope.authenticated = false;
+                $rootScope.headers = {};
                 $location.path("/");
             });
         }
