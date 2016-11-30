@@ -8,10 +8,14 @@
     z-index: 1000;
 }
 
-.container-fluid.top-menu .navbar-header {
-    margin-left: 20%;
+.top-menu .navbar-header .navbar-toggle {
+    z-index: 10001;
     color: #fff;
-    padding: 10px 15px;
+    border-color: #58a554;
+}
+
+.top-menu .icon-bar {
+    background-color: #58a554;
 }
 
 .container-fluid.top-menu ul.nav {

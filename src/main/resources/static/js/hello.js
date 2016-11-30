@@ -2,7 +2,7 @@ angular.module('main', [ 'ngRoute', 'ngAnimate' ])
     .config(function($routeProvider, $httpProvider) {
 
         $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-        console.log('asdasdasd');
+
         $routeProvider.when('/', {
             templateUrl : 'home.html',
             controller : 'navigation',
@@ -27,8 +27,8 @@ angular.module('main', [ 'ngRoute', 'ngAnimate' ])
         var authenticate = function(credentials, callback) {
 
             var headers = credentials ? {authorization : "Basic "
-                                        + btoa(credentials.username + ":" + credentials.password )
-                                        } : {};
+            + btoa(credentials.username + ":" + credentials.password )
+            } : {};
 
             $http.get('user', {headers : headers}).then(function(response) {
                 if (response.data.name) {
@@ -45,7 +45,6 @@ angular.module('main', [ 'ngRoute', 'ngAnimate' ])
 
         }
 
-        authenticate();
         self.credentials = {};
         self.login = function() {
             authenticate(self.credentials, function() {
@@ -66,4 +65,4 @@ angular.module('main', [ 'ngRoute', 'ngAnimate' ])
             });
         }
     }
-)
+    )

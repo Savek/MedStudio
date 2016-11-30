@@ -20,19 +20,19 @@
 
 <body ng-app="main" ng-cloak class="ng-cloak">
 <div class="container-fluid top-menu" ng-controller="navigation as nav">
-    <div class="navbar-header">
+    <div class="navbar-brand">
         MedStudio
     </div>
     <nav class="navbar" role="navigation">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" ng-click="isNavCollapsed = !isNavCollapsed">
+            <button type="button" class="navbar-toggle" ng-click="isCollapsed = !isCollapsed">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
         </div>
-        <div class="collapse navbar-collapse" uib-collapse="isNavCollapsed">
+        <div class="collapse navbar-collapse" collapse="isCollapsed">
             <ul class="nav navbar-nav">
                 <li ng-show="!authenticated"><a href="#/">Home</a></li>
                 <li ng-show="!authenticated"><a href="#/login">login</a></li>
