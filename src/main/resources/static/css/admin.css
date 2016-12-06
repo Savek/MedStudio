@@ -5,21 +5,79 @@ body {
 
 div.container-admin {
     background-color: #ffffff;
-    height: 500px;
-    margin: 10% 3% 10% 3%;
+    margin-top: 80px;
     z-index: 0;
+    box-shadow: inset 84px 47px 83px #fff, 0 0 55px #000;
+}
+
+div.logged-menu-firm {
+    height: 70px;
+    background-color: #58a554;
+    padding-top: 17px;
+    font-size: 24px;
+    color: #64b160;
+    text-align: center;
 }
 
 div.logged-header {
-    padding: 2%;
+    padding-top: 30px;
     height: 70px;
 }
 
 div.logged-header ul{
     margin: 0;
     padding: 0;
+    width: 200px;
+    margin-right: 5%;
 }
 
 div.logged-header ul li{
     display: inline;
+    margin-left: 20%;
+}
+
+div.logged-menu {
+    background-color: #1B2024;
+    padding: 0;
+}
+
+div.logged-menu ul.navbar-main-menu {
+    width: 100%;
+    color: #58a554;
+    cursor: pointer;
+}
+
+div.logged-menu ul.navbar-main-menu li {
+    width: 100%;
+    border-bottom: 1px solid #2B3033;
+    height: 50px;
+    padding-top: 15px;
+    padding-left: 20px;
+}
+
+div.logged-menu ul.navbar-main-menu li:hover {
+    background-color: #2B3033;
+}
+
+div.logged-menu ul.navbar-main-menu li i {
+    margin-right: 15px;
+}
+
+@media (min-width:1000px) {
+
+    div.container-admin {
+        margin: 10% 3% 10% 3%;
+    }
+
+    div.container-admin {
+        height: 700px;
+    }
+
+    div.logged-menu {
+        height: 630px;
+    }
+
+    div.logged-panel {
+        height: 630px;
+    }
 }
