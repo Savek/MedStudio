@@ -9,3 +9,17 @@ div.container-admin {
     margin: 10% 3% 10% 3%;
     z-index: 0;
 }
+
+div.logged-header {
+    padding: 2%;
+    height: 70px;
+}
+
+div.logged-header ul{
+    margin: 0;
+    padding: 0;
+}
+
+div.logged-header ul li{
+    display: inline;
+}

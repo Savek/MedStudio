@@ -1,4 +1,4 @@
-angular.module('main', [ 'ngRoute', 'ngAnimate' ])
+angular.module('main', [ 'ngRoute', 'ngAnimate', 'ngTouch', 'ui.bootstrap'])
     .config(function($routeProvider, $httpProvider) {
 
         $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';

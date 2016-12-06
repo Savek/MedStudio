@@ -23,7 +23,6 @@
     color: #fff;
     text-transform: uppercase;
     float: right;
-    margin-right: 20%;
 }
 
 .container-fluid.top-menu ul.nav li{
@@ -39,4 +38,33 @@
 .container-fluid.top-menu ul.nav li a:hover{
     color: #58a554;
     background-color: transparent;
+}
+
+@media (max-width:767px) {
+    .container-fluid.top-menu {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .navbar-collapse {
+        padding-right: 0px;
+        padding-left: 0px;
+        overflow-y: hidden;
+        background-color: #1b2024;
+        box-shadow: none;
+    }
+
+    .navbar-collapse.in {
+        overflow-y: hidden;
+    }
+
+    .container-fluid.top-menu ul.nav {
+        margin: 0;
+        margin-left: 40px;
+        float: left;
+    }
+
+    .container-fluid.top-menu ul.nav li {
+        width: 100%;
+    }
 }
