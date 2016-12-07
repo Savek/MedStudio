@@ -3,13 +3,37 @@
 <head>
     <script src="js/angular-bootstrap.js" type="text/javascript"></script>
     <script src="js/welcom_page.js.js"></script>
+    <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.4.0.js"></script>
 </head>
 
 <div class="container">
     <header>
         <div class="header-content">
             <div class="header-content-inner">
-                <h1>MedStudio</h1>
+                <div ng-controller="CarouselDemoCtrl">
+                    <script id="templates/carousel.html" type="text/ng-template">
+                        <div class="carousel-inner" ng-transclude></div>
+                        <ol class="carousel-indicators" ng-show="slides.length > 1">
+                            <li ng-repeat="slide in slides | orderBy:indexOfSlide track by $index" ng-class="{ active: isActive(slide) }" ng-click="select(slide)">
+                                <span class="sr-only">slide {{ $index + 1 }} of {{ slides.length }}<span ng-if="isActive(slide)">, currently active</span></span>
+                            </li>
+                        </ol>
+                    </script>
+                    <script id="templates/slide.html" type="text/ng-template">
+                        <div class="text-center" ng-transclude></div>
+                    </script>
+                    <div>
+                        <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides" template-url="templates/carousel.html">
+                            <div uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id" template-url="templates/slide.html">
+                                <img ng-src="{{slide.image}}" style="margin:auto;">
+                                <div class="carousel-caption">
+                                    <h4>Slide {{slide.id}}</h4>
+                                    <p>{{slide.text}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
@@ -17,9 +41,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <h2 class="section-heading">Want to make an original website yourself?</h2>
+                    <h2 class="section-heading">Chcesz wiedzieć o stanie zdrowia Twoich bliskich w każdej chwili?</h2>
 
-                    <p class="text-faded">Forget that! Who would ever want to put in all of that effort for a website? Just open up your web browser and type "bootstrap template" into your favorite search engine, like Yahoo! or Bing, and you're on your way! There are hundreds of templates to choose from, but go ahead and pick this same exact template from the first result on google, edit a few lines, and you're on your way! No one will notice!</p>
+                    <p class="text-faded">
+                        Przedstawiamy Ci idealne rozwiązanie, MedStudio. Przenośnie urządzenie do pomiaru podstawowych parametrów życiowych,
+                        umożliwi Ci zdalne kontrolowanie stanu zdrowia osób Ci bliskich.
+                    </p>
                 </div>
             </div>
         </div>
@@ -28,7 +55,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Lorem ipsum</h2>
+                    <h2 class="section-heading">Dlaczego MedStudio?</h2>
                     <hr class="primary">
                 </div>
             </div>
@@ -38,29 +65,39 @@
                 <div class="col-lg-3 col-md-6 text-center">
                     <div class="service-box">
                         <i class="fa fa-4x fa-globe wow bounceIn text-primary" style="visibility: visible; animation-name: bounceIn;"></i>
-                        <h3>This Fucking Template</h3>
-                        <p class="text-muted">Guaranteed to use the same fucking template that every other bootstrap website uses, downloaded straight from The Web&trade;</p>
+                        <h3>Mobilność</h3>
+                        <p class="text-muted">
+                            Dzieki swojemu rozmiarowi noszenie płytki nie sprawia problemów.
+                        </p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 text-center">
                     <div class="service-box">
                         <i class="fa fa-4x fa-paper-plane wow bounceIn text-primary" data-wow-delay=".1s" style="visibility: visible; animation-delay: 0.1s; animation-name: bounceIn;"></i>
-                        <h3>This Set of Four Icons</h3>
-                        <p class="text-muted">Look at this cool set of four icons describing different things about us! We use four, because it's the default.</p>
+                        <h3>Szybkość</h3>
+                        <p class="text-muted">
+                            Nasza płytka wykorzustuję najnowsze technologie, przez co wyniki odbierane są w czasie rzeczywistym.
+                        </p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 text-center">
                     <div class="service-box">
                         <i class="fa fa-4x fa-thumbs-up wow bounceIn text-primary" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: bounceIn;"></i>
-                        <h3>Lots of effort</h3>
-                        <p class="text-muted">We even changed some of the icons! We take the extra effort to make our designs truly original.</p>
+                        <h3>Zdalny dostęp</h3>
+                        <p class="text-muted">
+                            Każde z urządzeń podłączone jest do naszego systemu zarządania, umożliwiając użytkownikowi zalogowanie się
+                            z każdego miejsca na świecie.
+                        </p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 text-center">
                     <div class="service-box">
                         <i class="fa fa-4x fa-heart wow bounceIn text-primary" data-wow-delay=".3s" style="visibility: visible; animation-delay: 0.3s; animation-name: bounceIn;"></i>
-                        <h3>Made with Love</h3>
-                        <p class="text-muted">Because nothing says hard work and talent like editing a few lines of text.</p>
+                        <h3>Działamy z pasją</h3>
+                        <p class="text-muted">
+                            Naszym celem jest połączenie najnowszych osiągnięć techniki w celu ułatwienia życia ludziom, którzy posiadają w rodzinie
+                            osoby wymagające monitorowania.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -70,7 +107,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <h2 class="section-heading">Team</h2>
+                    <h2 class="section-heading">Zespół</h2>
                     <hr>
                     <div class="row">
                         <div class="col-md-6">
@@ -78,14 +115,6 @@
                                 <img src="img/teamPhoto.jpg" class="img-responsive img-circle" alt="">
                                 <h4>Maj Mateusz</h4>
                                 <p class="text-muted">Feeder & Noob</p>
-                                <ul class="list-inline social-buttons">
-                                    <li><a href="#"><i class="fa fa-twitter"></i></a>
-                                    </li>
-                                    <li><a href="#"><i class="fa fa-facebook"></i></a>
-                                    </li>
-                                    <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                                    </li>
-                                </ul>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -93,14 +122,6 @@
                                 <img src="img/teamPhoto.jpg" class="img-responsive img-circle" alt="">
                                 <h4>Krzysztof Mazur</h4>
                                 <p class="text-muted">Lead Designer</p>
-                                <ul class="list-inline social-buttons">
-                                    <li><a href="#"><i class="fa fa-twitter"></i></a>
-                                    </li>
-                                    <li><a href="#"><i class="fa fa-facebook"></i></a>
-                                    </li>
-                                    <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                                    </li>
-                                </ul>
                             </div>
                         </div>
                     </div>
@@ -114,18 +135,7 @@
     <footer>
         <div class="container">
             <div class="row">
-                <div class="col-md-6">
-                    <span class="copyright">Copyright &copy; Your Website 2016</span>
-                </div>
-
-                <div class="col-md-6">
-                    <ul class="list-inline quicklinks">
-                        <li><a href="#">Privacy Policy</a>
-                        </li>
-                        <li><a href="#">Terms of Use</a>
-                        </li>
-                    </ul>
-                </div>
+                <span class="copyright">Copyright &copy; MedStudio 2016</span>
             </div>
         </div>
     </footer>
