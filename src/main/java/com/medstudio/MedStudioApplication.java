@@ -1,5 +1,6 @@
 package com.medstudio;
 
+import com.medstudio.dbdata.Results;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -28,4 +29,5 @@ public class MedStudioApplication {
 
         SpringApplication.run(MedStudioApplication.class, args);
 	}
+
 }

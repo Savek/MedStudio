@@ -22,18 +22,25 @@ div.logged-menu-firm {
 div.logged-header {
     padding-top: 30px;
     height: 70px;
+    border-bottom: 1px solid #2B3033;
+}
+
+div.logged-header span {
+    color: #2B3033;
+    opacity: 0.4;
+    font-size: 14px;
 }
 
 div.logged-header ul{
     margin: 0;
     padding: 0;
-    width: 200px;
+    width: 300px;
     margin-right: 5%;
 }
 
 div.logged-header ul li{
     display: inline;
-    margin-left: 20%;
+    margin-left: 17%;
 }
 
 div.logged-menu {

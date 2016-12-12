@@ -3,7 +3,6 @@ body {
     background-color: #2B3033;
 }
 
-/* ANIMATION */
 div.view.ng-enter {
     transition: 0.5s linear all;
     opacity: 0;
@@ -18,6 +17,29 @@ div.view.ng-enter.ng-enter-active {
 .container {
     width: 100%;
     padding: 0;
+}
+
+div.carousel-caption.ng-enter {
+    transition: 0.5s linear all;
+    opacity: 0;
+}
+
+div.carousel-caption.ng-enter.ng-enter-active {
+    transition: 0.5s linear all;
+    opacity: 1;
+}
+
+@media screen and (min-width: 768px) {
+
+    .carousel-caption {
+        width: 25%;
+        left: 13%;
+        right: 0;
+        bottom: 40%;
+        padding-bottom: 30px;
+        background-color: rgba(27,32,36,0.8);
+        border-radius: 10px;
+    }
 }
 
 header {

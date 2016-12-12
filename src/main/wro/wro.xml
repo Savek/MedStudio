@@ -11,5 +11,6 @@
         <js>webjar:angular-animate/1.5.9/angular-animate.min.js</js>
         <js>webjar:angular-touch/1.5.9/angular-touch.min.js</js>
         <js>webjar:angular-ui-bootstrap/2.2.0/ui-bootstrap.js</js>
+        <js>webjar:angular-chart.js/1.0.3/angular-chart.js</js>
     </group>
 </groups>
