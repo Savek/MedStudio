@@ -1,4 +1,4 @@
-package com.medstudio.security;
+package com.medstudio.models.security;
 
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.filter.OncePerRequestFilter;

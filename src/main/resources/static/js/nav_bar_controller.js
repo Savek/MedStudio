@@ -15,7 +15,8 @@ angular
                 } : {};
 
                 $http.get('user', {headers : headers}).then(function(response) {
-                    if (response.data.name) {
+                    console.log(response);
+                    if (response.data.enabled == true) {
                         $rootScope.authenticated = true;
                         $location.path("/");
                     } else {
