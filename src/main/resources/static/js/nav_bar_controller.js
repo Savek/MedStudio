@@ -15,7 +15,6 @@ angular
                 } : {};
 
                 $http.get('user', {headers : headers}).then(function(response) {
-                    console.log(response);
                     if (response.data.enabled == true) {
                         $rootScope.authenticated = true;
                         $location.path("/");
@@ -27,8 +26,9 @@ angular
                     $rootScope.authenticated = false;
                     callback && callback();
                 });
+            };
 
-            }
+            authenticate();
 
             self.credentials = {};
             self.login = function() {
@@ -42,8 +42,9 @@ angular
                     }
                 });
             };
+
             self.logout = function() {
-                $http.post('/logout', {}).finally(function () {
+                $http.post('/logoutUser', {}).finally(function () {
                     $rootScope.authenticated = false;
                     $rootScope.headers = {};
                     $location.path("/");

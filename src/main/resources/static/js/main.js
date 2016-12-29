@@ -17,8 +17,6 @@ angular
                     controllerAs: 'controller'
                 }).when('/admin', {
                     templateUrl: 'admin.html',
-                    controller: 'navigation',
-                    controllerAs: 'controller'
                 }).otherwise('/');
             }
         );

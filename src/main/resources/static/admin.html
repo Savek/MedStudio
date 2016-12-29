@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="css/admin.css">
 
-<div class="container-admin container">
+<div ng-controller="adminController" class="container-admin container">
     <div class="logged-menu-firm col-md-2">
         MedStudio
     </div>
@@ -16,7 +16,7 @@
                 <i class="fa fa-gear" aria-hidden="true"></i>
             </li>
             <li class="user-name">
-                USER
+                {{userName}}
             </li>
             <li class="logout">
                 <i class="fa fa-power-off" aria-hidden="true"></i>
@@ -46,6 +46,6 @@
         </ul>
     </div>
     <div class="logged-panel container-fluid col-md-10">
-
+        <div ng-include ="../user.html" ng-show="controller.showUser"></div>
     </div>
 </div>

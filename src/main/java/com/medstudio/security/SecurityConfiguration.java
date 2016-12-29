@@ -1,4 +1,4 @@
-package com.medstudio.models.security;
+package com.medstudio.security;
 
 import com.medstudio.MedStudioApplication;
 import com.medstudio.models.services.CustomUserDetailsService;
@@ -64,7 +64,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.userDetailsService(userDetailsService());
         http
                 .httpBasic()
             .and()
