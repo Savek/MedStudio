@@ -1,0 +1,41 @@
+div.userPhoto img {
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+    display: block;
+    margin: 0 auto;
+}
+
+div.userDetails {
+    padding: 35px;
+}
+
+div.userDetails form {
+    text-align: center;
+}
+
+div.userDetails div.input-group {
+    margin-bottom: 10px;
+}
+
+div.userDetails button {
+    background-color: #58a554;
+    color: #fff;
+}
+
+div.userDetails button:hover, div.userDetails button:active, div.userDetails button:focus {
+    background-color: #64b160;
+    color: #fff;
+}
+
+div.userDetails .form-control:focus {
+    border-color: #58a554;
+}
+
+div.userDetails .input-group {
+    width: 100%;
+}
+
+div.userDetails span.input-group-addon {
+    width: 35%;
+}

@@ -15,7 +15,6 @@ import java.util.Set;
 public @Data class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     private String name;

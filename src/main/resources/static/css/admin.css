@@ -40,12 +40,15 @@ div.logged-header ul{
 
 div.logged-header ul li{
     display: inline;
-    margin-left: 17%;
+    margin-left: 15%;
+}
+
+div.logged-header ul li a{
+    display: inline;
 }
 
 div.logged-menu {
     background-color: #1B2024;
-    padding: 0;
 }
 
 div.logged-menu ul.navbar-main-menu {
@@ -68,6 +71,10 @@ div.logged-menu ul.navbar-main-menu li:hover {
 
 div.logged-menu ul.navbar-main-menu li i {
     margin-right: 15px;
+}
+
+div.logged-panel {
+    padding: 45px;
 }
 
 @media (min-width:1000px) {
