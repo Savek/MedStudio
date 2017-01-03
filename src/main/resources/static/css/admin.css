@@ -34,17 +34,35 @@ div.logged-header span {
 div.logged-header ul{
     margin: 0;
     padding: 0;
-    width: 300px;
+    width: 400px;
     margin-right: 5%;
 }
 
 div.logged-header ul li{
     display: inline;
-    margin-left: 15%;
+    margin-left: 13%;
+}
+
+div.logged-header ul li.user-avatar{
+    margin-left: 7%;
+}
+
+div.logged-header ul li img{
+    width: 36px;
+    height: 36px;
+    border-radius: 20px;
 }
 
 div.logged-header ul li a{
     display: inline;
+    padding: 0;
+    color: #2B3033;
+    font-size: 14px;
+}
+
+div.logged-header ul li a:hover{
+    background-color: inherit;
+    color: #58a554;
 }
 
 div.logged-menu {

@@ -2,34 +2,45 @@
 <link rel="stylesheet" href="css/userDetails.css">
 
 <div>
-    <div class="col-md-6 userPhoto"><img src="img/default_avatar.png"></div>
-    <div class="col-md-6 userDetails">
-        <form>
-
-            <div class="input-group">
-                <span class="input-group-addon" id="basic-addon1">Imię</span>
-                <input type="text" class="form-control" value="{{ userUpdate.name }}" aria-describedby="basic-addon1" ng-model="userUpdate.name">
-            </div>
-
-            <div class="input-group">
-                <span class="input-group-addon" id="basic-addon2">Nazwisko</span>
-                <input type="text" class="form-control" value="{{ userUpdate.surname }}" aria-describedby="basic-addon2" ng-model="userUpdate.surname">
-            </div>
-
-            <div class="input-group">
-                <span class="input-group-addon" id="basic-addon3">Email</span>
-                <input type="text" class="form-control" value="{{ userUpdate.email }}" aria-describedby="basic-addon3" ng-model="userUpdate.email">
-            </div>
-
-            <div class="input-group">
-                <span class="input-group-addon" id="basic-addon4">Hasło</span>
-                <input type="password" class="form-control" value="{{ userUpdate.password }}" aria-describedby="basic-addon4" ng-model="userUpdate.password">
-            </div>
-
-            <button type="submit" class="btn btn-default" ng-click="update(userUpdate)">Submit</button>
-        </form>
-
+    <div ng-show="userUpdateSucess" class="alert alert-success">
+        Pomyślnie zakutalizowano!
     </div>
+    <div ng-show="userUpdateSucess == false" class="alert alert-danger">
+        Wystąpił błąd!
+    </div>
+    <form>
+        <div class="col-md-6 userPhoto">
+            <img id="userDetailsAvatar" src="data:image/png;base64,{{ userUpdate.image }}">
+
+            <input type="file" name="file" id="file" class="fileInput" ng-model="value" onchange="angular.element(this).scope().previewFile()"/>
+            <label for="file">Wybierz plik</label>
+        </div>
+        <div class="col-md-6 userDetails">
+
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">Imię</span>
+                    <input type="text" class="form-control" value="{{ userUpdate.name }}" aria-describedby="basic-addon1" ng-model="userUpdate.name">
+                </div>
+
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon2">Nazwisko</span>
+                    <input type="text" class="form-control" value="{{ userUpdate.surname }}" aria-describedby="basic-addon2" ng-model="userUpdate.surname">
+                </div>
+
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon3">Email</span>
+                    <input type="text" class="form-control" value="{{ userUpdate.email }}" aria-describedby="basic-addon3" ng-model="userUpdate.email">
+                </div>
+
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon4">Hasło</span>
+                    <input type="password" class="form-control" value="{{ userUpdate.password }}" aria-describedby="basic-addon4" ng-model="userUpdate.password">
+                </div>
+
+                <button type="submit" class="btn btn-default" ng-click="update(userUpdate)">Submit</button>
+
+        </div>
+    </form>
 </div>
 
 

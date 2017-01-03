@@ -30,18 +30,21 @@
             MedStudio
         </div>
         <div class="logged-header col-md-10">
-            <span class="text-capitalize">
+            <span class="text-capitalize" ng-change="actualPage" ng-model="actualPage">
                 {{ actualPage }}
             </span>
             <ul class="nav navbar-top-links navbar-right">
                 <li class="home">
-                    <i class="fa fa-home" aria-hidden="true"></i>
+                    <a href="#/"><i class="fa fa-home" aria-hidden="true"></i></a>
                 </li>
                 <li class="config">
                     <i class="fa fa-gear" aria-hidden="true"></i>
                 </li>
                 <li class="user-name">
                     <a href="#/userDetails">{{ user.name }}</a>
+                </li>
+                <li class="user-avatar">
+                    <img src="data:image/png;base64,{{ user.image }}">
                 </li>
                 <li class="logout">
                     <a href="" ng-click="adCont.logout()"><i class="fa fa-power-off" aria-hidden="true"></i></a>

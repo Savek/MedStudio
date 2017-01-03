@@ -10,8 +10,35 @@ div.userDetails {
     padding: 35px;
 }
 
-div.userDetails form {
+form {
     text-align: center;
+}
+
+form input[type="file"] {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+form .fileInput + label {
+    background-color: #58a554;
+    color: #fff;
+    display: inline-block;
+    border: 1px solid #ccc;
+    padding: 6px 12px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 4px;
+    line-height: 1.428571429;
+    margin-top: 50px;
+}
+
+form .fileInput:focus + label,
+form .fileInput + label:hover {
+    background-color: #64b160;
 }
 
 div.userDetails div.input-group {
@@ -21,6 +48,7 @@ div.userDetails div.input-group {
 div.userDetails button {
     background-color: #58a554;
     color: #fff;
+    margin-top: 40px;
 }
 
 div.userDetails button:hover, div.userDetails button:active, div.userDetails button:focus {
