@@ -1,24 +1,25 @@
-
 angular
-    .module('admin', [ 'ngRoute', 'ngAnimate', 'ngTouch', 'ui.bootstrap'])
+    .module('admin', ['ngRoute', 'ngAnimate', 'ngTouch', 'ui.bootstrap', 'chart.js'])
     .config(
-        function($routeProvider, $httpProvider) {
+        function ($routeProvider, $httpProvider) {
 
             $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
             $routeProvider.when('/userDetails', {
                 templateUrl: 'userDetails.html',
+            }).when('/cisnienie', {
+                templateUrl: 'cisnienie.html',
             }).otherwise('/');
         }
     )
     .controller('adminController',
-        function($scope, $http, $location) {
+        function ($scope, $http, $location) {
 
             $scope.actualPage = $location.path()
                 .replace("\/", "")
                 .replace(/([a-z]*)([A-Z]?.*)/, "$1 $2");
 
-            $scope.$on('$locationChangeStart', function(event) {
+            $scope.$on('$locationChangeStart', function (event) {
                 $scope.userUpdateSucess = null;
 
                 $scope.actualPage = $location.path()
@@ -27,19 +28,19 @@ angular
             });
 
             $scope.userUpdateSucess = null
-            $scope.update = function(updateUser) {
+            $scope.update = function (updateUser) {
 
                 $http
                     .post('/updateUser', updateUser)
-                    .then(function(response) {
+                    .then(function (response) {
                         $scope.user = angular.copy($scope.userUpdate);
                         $scope.userUpdateSucess = true;
-                    }, function() {
+                    }, function () {
                         $scope.userUpdateSucess = false;
                     });
             };
 
-            $scope.logout = function() {
+            $scope.logout = function () {
 
                 $http.post('/logoutUser', {}).finally(function () {
                     $rootScope.authenticated = false;
@@ -48,20 +49,20 @@ angular
                 });
             };
 
-            $scope.previewFile = function() {
+            $scope.previewFile = function () {
 
                 var file = document.querySelector('#file').files[0];
                 var reader = new FileReader();
-                reader.onload = function() {
+                reader.onload = function () {
                     $scope.userUpdate.image = reader.result
-                                                        .replace("data:image\/png;base64,", "")
-                                                        .replace("data:image\/jpeg;base64,", "");
+                        .replace("data:image\/png;base64,", "")
+                        .replace("data:image\/jpeg;base64,", "");
                     document.querySelector('#userDetailsAvatar').src = reader.result;
                 };
                 reader.readAsDataURL(file);
             };
 
-            $http.post('/user').then(function(response) {
+            $http.post('/user').then(function (response) {
                 if (response.data.enabled == true) {
                     $scope.authenticated = true;
                     $scope.user = response.data;
@@ -72,7 +73,7 @@ angular
                     $location.path("/");
                 }
 
-            }, function() {
+            }, function () {
                 $scope.authenticated = false;
                 $location.path("/");
             });
@@ -83,4 +84,34 @@ angular
                 $scope.showUser = true;
             }
         }
-    );
+    ).controller("LineCtrl", function ($scope) {
+
+        $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
+        $scope.series = ['Series A'];
+        $scope.colors = ['#58a554'];
+        $scope.data = [
+            [65, 59, 80, 81, 56, 55, 40]
+        ];
+        $scope.onClick = function (points, evt) {
+            console.log(points, evt);
+        };
+        $scope.datasetOverride = [{yAxisID: 'y-axis-1'}];
+        $scope.options = {
+            scales: {
+                yAxes: [
+                    {
+                        id: 'y-axis-1',
+                        type: 'linear',
+                        display: true,
+                        position: 'left'
+                    },
+                ]
+            },
+            elements: {
+                line: {
+                    tension: 0
+                }
+            }
+        };
+
+    });

@@ -11,6 +11,9 @@
     <link
             href="css/nav.css"
             rel="stylesheet">
+
+    <link rel="shortcut icon" href="img/heart.png">
+
     <style type="text/css">
         [ng\:cloak], [ng-cloak], .ng-cloak {
             display: none !important;
@@ -25,58 +28,58 @@
 
 <body ng-app="admin">
 
-    <div ng-controller="adminController as adCont" class="container-admin container">
-        <div class="logged-menu-firm col-md-2">
-            MedStudio
-        </div>
-        <div class="logged-header col-md-10">
+<div ng-controller="adminController as adCont" class="container-admin container">
+    <div class="logged-menu-firm col-md-2">
+        MedStudio
+    </div>
+    <div class="logged-header col-md-10">
             <span class="text-capitalize" ng-change="actualPage" ng-model="actualPage">
                 {{ actualPage }}
             </span>
-            <ul class="nav navbar-top-links navbar-right">
-                <li class="home">
-                    <a href="#/"><i class="fa fa-home" aria-hidden="true"></i></a>
-                </li>
-                <li class="config">
-                    <i class="fa fa-gear" aria-hidden="true"></i>
-                </li>
-                <li class="user-name">
-                    <a href="#/userDetails">{{ user.name }}</a>
-                </li>
-                <li class="user-avatar">
-                    <img src="data:image/png;base64,{{ user.image }}">
-                </li>
-                <li class="logout">
-                    <a href="" ng-click="adCont.logout()"><i class="fa fa-power-off" aria-hidden="true"></i></a>
-                </li>
-            </ul>
-        </div>
-        <div class="logged-menu container-fluid col-md-2">
-            <ul class="nav navbar-main-menu navbar-left">
-                <li>
-                    <i class="fa fa-gear" aria-hidden="true"></i> Aministration
-                </li>
-                <li>
-                    <i class="fa fa-gear" aria-hidden="true"></i> Aministration
-                </li>
-                <li>
-                    <i class="fa fa-power-off" aria-hidden="true"></i> Aministration
-                </li>
-                <li>
-                    <i class="fa fa-power-off" aria-hidden="true"></i> Aministration
-                </li>
-                <li>
-                    <i class="fa fa-power-off" aria-hidden="true"></i> Aministration
-                </li>
-                <li>
-                    <i class="fa fa-power-off" aria-hidden="true"></i> Aministration
-                </li>
-            </ul>
-        </div>
-        <div ng-view class="logged-panel container-fluid col-md-10">
-
-        </div>
+        <ul class="nav navbar-top-links navbar-right">
+            <li class="home">
+                <a href="/index.html"><i class="fa fa-home" aria-hidden="true"></i></a>
+            </li>
+            <li class="config">
+                <i class="fa fa-gear" aria-hidden="true"></i>
+            </li>
+            <li class="user-name">
+                <a href="#/userDetails">{{ user.name }}</a>
+            </li>
+            <li class="user-avatar">
+                <img src="data:image/png;base64,{{ user.image }}">
+            </li>
+            <li class="logout">
+                <a href="" ng-click="adCont.logout()"><i class="fa fa-power-off" aria-hidden="true"></i></a>
+            </li>
+        </ul>
     </div>
+    <div class="logged-menu container-fluid col-md-2">
+        <ul class="nav navbar-main-menu navbar-left">
+            <li>
+                <a href="#/cisnienie"><i class="fa fa-gear" aria-hidden="true"></i> Ciśnienie</a>
+            </li>
+            <li>
+                <i class="fa fa-gear" aria-hidden="true"></i> Temperatura
+            </li>
+            <li>
+                <i class="fa fa-power-off" aria-hidden="true"></i> Tętno
+            </li>
+            <li>
+                <i class="fa fa-power-off" aria-hidden="true"></i> Aministration
+            </li>
+            <li>
+                <i class="fa fa-power-off" aria-hidden="true"></i> Aministration
+            </li>
+            <li>
+                <i class="fa fa-power-off" aria-hidden="true"></i> Aministration
+            </li>
+        </ul>
+    </div>
+    <div ng-view class="logged-panel container-fluid col-md-10">
+
+    </div>
+</div>
 
 </body>
 </html>

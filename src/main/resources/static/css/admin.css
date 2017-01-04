@@ -67,6 +67,7 @@ div.logged-header ul li a:hover{
 
 div.logged-menu {
     background-color: #1B2024;
+    padding: 0;
 }
 
 div.logged-menu ul.navbar-main-menu {
@@ -98,7 +99,7 @@ div.logged-panel {
 @media (min-width:1000px) {
 
     div.container-admin {
-        margin-top: 10%;
+        margin-top: 8%;
         width: 76%;
     }
 
