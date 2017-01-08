@@ -18,13 +18,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.security.Principal;
+
 @Controller
 public class UserController {
 
     @Autowired
     UserRepository repo;
 
-    @RequestMapping("/user")
+    @RequestMapping("/userInfo")
     @ResponseBody
     public User user() {
         AbstractAuthenticationToken auth = (AbstractAuthenticationToken)
@@ -38,14 +40,17 @@ public class UserController {
         return null;
     }
 
+    @RequestMapping("/user")
+    @ResponseBody
+    public Principal user(Principal user) {
+        return user;
+    }
+
     @RequestMapping("/updateUser")
     @ResponseBody
     public User updateUser(@RequestBody User user) {
 
-        System.out.println(user.toString());
-        repo.save(user);
-
-        return user;
+        return repo.save(user);
     }
 }
 

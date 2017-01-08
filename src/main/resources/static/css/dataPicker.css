@@ -1,0 +1,22 @@
+.btn-picker {
+    background-color: #fff;
+    color: #333333;
+    border-color: #fff;
+}
+
+.btn-picker.active, .btn-picker.active:hover {
+    background-color: #58a554;
+    border-color: #58a554;
+}
+
+.btn-picker:hover {
+    background-color: #cccccc;
+}
+
+.text-info {
+    color: inherit;
+}
+
+ul.uib-datepicker-popup {
+    box-shadow: inset 84px 47px 83px #fff, 0 0 15px #000;
+}

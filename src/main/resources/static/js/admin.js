@@ -7,24 +7,26 @@ angular
 
             $routeProvider.when('/userDetails', {
                 templateUrl: 'userDetails.html',
-            }).when('/cisnienie', {
+            }).when('/cisnienie/:userId/:resultType', {
                 templateUrl: 'cisnienie.html',
+            }).when('/resultDetails/:userId/:resultType/:date', {
+                templateUrl: 'resultsDetails.html',
             }).otherwise('/');
         }
     )
     .controller('adminController',
         function ($scope, $http, $location) {
 
-            $scope.actualPage = $location.path()
-                .replace("\/", "")
-                .replace(/([a-z]*)([A-Z]?.*)/, "$1 $2");
+            //$scope.actualPage = $location.path()
+            //    .replace("\/", "")
+            //    .replace(/([a-z]*)([A-Z]?.*)/, "$1 $2");
 
             $scope.$on('$locationChangeStart', function (event) {
                 $scope.userUpdateSucess = null;
 
-                $scope.actualPage = $location.path()
-                    .replace("\/", "")
-                    .replace(/([a-z]*)([A-Z]?.*)/, "$1 $2");
+                //$scope.actualPage = $location.path()
+                //    .replace("\/", "")
+                //    .replace(/([a-z]*)([A-Z]?.*)/, "$1 $2");
             });
 
             $scope.userUpdateSucess = null
@@ -62,7 +64,7 @@ angular
                 reader.readAsDataURL(file);
             };
 
-            $http.post('/user').then(function (response) {
+            $http.post('/userInfo').then(function (response) {
                 if (response.data.enabled == true) {
                     $scope.authenticated = true;
                     $scope.user = response.data;
@@ -84,34 +86,4 @@ angular
                 $scope.showUser = true;
             }
         }
-    ).controller("LineCtrl", function ($scope) {
-
-        $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
-        $scope.series = ['Series A'];
-        $scope.colors = ['#58a554'];
-        $scope.data = [
-            [65, 59, 80, 81, 56, 55, 40]
-        ];
-        $scope.onClick = function (points, evt) {
-            console.log(points, evt);
-        };
-        $scope.datasetOverride = [{yAxisID: 'y-axis-1'}];
-        $scope.options = {
-            scales: {
-                yAxes: [
-                    {
-                        id: 'y-axis-1',
-                        type: 'linear',
-                        display: true,
-                        position: 'left'
-                    },
-                ]
-            },
-            elements: {
-                line: {
-                    tension: 0
-                }
-            }
-        };
-
-    });
+    );

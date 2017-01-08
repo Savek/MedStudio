@@ -24,15 +24,4 @@ public @Data class User {
     private String email;
     private boolean enabled;
     private byte[] image;
-
-    public User() { }
-
-    public User(long id) {
-        this.id = id;
-    }
-
-    public User(String email, String name) {
-        this.email = email;
-        this.name = name;
-    }
 }

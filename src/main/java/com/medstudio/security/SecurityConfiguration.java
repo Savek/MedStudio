@@ -1,7 +1,7 @@
 package com.medstudio.security;
 
 import com.medstudio.MedStudioApplication;
-import com.medstudio.models.services.CustomUserDetailsService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -32,14 +32,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private DataSource dataSource;
 
-    @Autowired
-    @Qualifier("customUserDetailsService")
-    CustomUserDetailsService userDetailsService;
-
-    @Override
-    protected UserDetailsService userDetailsService() {
-        return userDetailsService;
-    }
 
     @Bean
     public PersistentTokenRepository persistentTokenRepository() {
@@ -53,12 +45,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 
         auth
-                .userDetailsService(userDetailsService);
-    }
-
-    @Override
-    public UserDetailsService userDetailsServiceBean() {
-        return new CustomUserDetailsService();
+                .jdbcAuthentication()
+                .dataSource(dataSource)
+                .usersByUsernameQuery("select login as username, password, enabled FROM users where login = ?")
+                .authoritiesByUsernameQuery("select u.login as username, r.role as role_name from user_roles r, users u where u.login = ?");
     }
 
     @Override
