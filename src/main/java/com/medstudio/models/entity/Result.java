@@ -3,9 +3,11 @@ package com.medstudio.models.entity;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -14,13 +16,14 @@ import java.util.Date;
 
 @Entity
 @Table(name = "results")
-public @Data class Result {
+@Data public class Result {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-    private long user;
-    private long result_type;
-    private String value;
-    private Date date;
+    private Long id;
+    private Long user;
+    private Long result_type;
+    private Long value;
+    @Convert(converter = Jsr310JpaConverters.LocalDateTimeConverter.class)
+    private LocalDateTime date;
 }

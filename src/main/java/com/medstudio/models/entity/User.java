@@ -12,7 +12,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "users")
-public @Data class User {
+@Data public class User {
 
     @Id
     private long id;
@@ -22,6 +22,6 @@ public @Data class User {
     private String login;
     private String password;
     private String email;
-    private boolean enabled;
-    private byte[] image;
+    private Boolean enabled;
+    private Byte[] image;
 }
