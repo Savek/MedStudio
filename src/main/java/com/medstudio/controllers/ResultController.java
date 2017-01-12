@@ -1,6 +1,6 @@
 package com.medstudio.controllers;
 
-import com.medstudio.models.crud.ResultRepository;
+import com.medstudio.models.repository.ResultRepository;
 import com.medstudio.models.entity.QResult;
 import com.medstudio.models.entity.Result;
 import com.mysema.query.jpa.JPQLQuery;
@@ -11,13 +11,10 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.*;
-import static java.util.stream.Collectors.toMap;
 
 /**
  * Created by Savek on 2016-12-21.
@@ -46,7 +43,7 @@ public class ResultController {
                 .where(result.user.eq(userId)
                         .and(result.date.month().eq(date.getMonthValue()))
                         .and(result.date.year().eq(date.getYear()))
-                        .and(result.result_type.eq(resultType)))
+                        .and(result.resultType.eq(resultType)))
                 .orderBy(result.date.asc())
                 .list(result);
 
@@ -62,18 +59,16 @@ public class ResultController {
     @RequestMapping("/getResultsDetails/{userId}/{resultType}")
     @ResponseBody
     public List resultsType(@PathVariable Long userId, @PathVariable Long resultType,
-                            @RequestParam(value="date") @DateTimeFormat(pattern="yyyy-M-dd") Date date) {
+                            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date) {
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
         QResult result = QResult.result;
         JPQLQuery query = new JPAQuery (entityManager);
 
         List<Result> results = query
                 .from(result)
                 .where(result.user.eq(userId)
-                        .and(result.date.dayOfMonth().eq(Calendar.DATE))
-                        .and(result.result_type.eq(resultType)))
+                        .and(result.date.dayOfMonth().eq(date.getDayOfMonth()))
+                        .and(result.resultType.eq(resultType)))
                 .orderBy(result.date.asc())
                 .list(result);
 

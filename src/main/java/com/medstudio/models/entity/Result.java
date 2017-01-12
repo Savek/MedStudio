@@ -21,8 +21,9 @@ import java.util.Date;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     private Long user;
-    private Long result_type;
+    private Long resultType;
     private Long value;
     @Convert(converter = Jsr310JpaConverters.LocalDateTimeConverter.class)
     private LocalDateTime date;

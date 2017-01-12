@@ -1,4 +1,4 @@
-package com.medstudio.models.crud;
+package com.medstudio.models.repository;
 
 import com.medstudio.models.entity.User;
 import org.springframework.data.repository.CrudRepository;

@@ -70,6 +70,9 @@ angular
                     $scope.user = response.data;
                     $scope.userUpdate = angular.copy(response.data);
 
+                    $scope.hospital = $scope.user.hospitals[0];
+                    $scope.totalItems = $scope.user.hospitals.length;
+                    $scope.currentPage = 1;
                 } else {
                     $scope.authenticated = false;
                     $location.path("/");
@@ -85,5 +88,13 @@ angular
             } else {
                 $scope.showUser = true;
             }
+
+            $scope.setPage = function (pageNo) {
+                $scope.currentPage = pageNo;
+            };
+
+            $scope.pageChanged = function() {
+                $scope.hospital = $scope.user.hospitals[$scope.currentPage];
+            };
         }
     );

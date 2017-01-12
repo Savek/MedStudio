@@ -38,9 +38,14 @@
                 </div>
 
                 <button type="submit" class="btn btn-default" ng-click="update(userUpdate)">Submit</button>
-
         </div>
     </form>
+
+    <div>
+        {{hospital.name}}
+        {{bigTotalItems}}
+    </div>
+    <ul uib-pagination items-per-page="1" total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"></ul>
 </div>
 
 

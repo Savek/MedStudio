@@ -12,6 +12,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.csrf.CsrfFilter;
@@ -32,6 +34,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private DataSource dataSource;
 
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        PasswordEncoder encoder = new BCryptPasswordEncoder();
+        return encoder;
+    }
 
     @Bean
     public PersistentTokenRepository persistentTokenRepository() {
@@ -47,8 +54,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         auth
                 .jdbcAuthentication()
                 .dataSource(dataSource)
-                .usersByUsernameQuery("select login as username, password, enabled FROM users where login = ?")
-                .authoritiesByUsernameQuery("select u.login as username, r.role as role_name from user_roles r, users u where u.login = ?");
+                .passwordEncoder(passwordEncoder())
+                .usersByUsernameQuery("select login as username, password, enabled FROM user where login = ?")
+                .authoritiesByUsernameQuery("select u.login as username, r.role as role_name from role r" +
+                                " join user_roles ur on r.id = ur.roles_id " +
+                                " join user u on ur.user_id = u.id" +
+                        " where u.login = ?");
     }
 
     @Override
