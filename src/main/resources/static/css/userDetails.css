@@ -67,3 +67,17 @@ div.userDetails .input-group {
 div.userDetails span.input-group-addon {
     width: 35%;
 }
+
+div.hospitals {
+    text-align: center;
+    margin-top: 25px;
+}
+
+div.hospitals .pagination > li > a {
+    color: #ccc;
+}
+
+div.hospitals .pagination .active a{
+    background-color: #58a554;
+    border-color: #ccc;
+}

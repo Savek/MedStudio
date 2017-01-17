@@ -22,9 +22,13 @@ import java.util.Date;
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private Long user;
+    @ManyToOne
+    @JoinColumn(name="user_id", referencedColumnName="id")
+    private User user;
+
     private Long resultType;
     private Long value;
+
     @Convert(converter = Jsr310JpaConverters.LocalDateTimeConverter.class)
     private LocalDateTime date;
 }

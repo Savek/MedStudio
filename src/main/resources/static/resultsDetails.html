@@ -1,6 +1,15 @@
 
-<div ng-controller="resultDetailsController">
+<div ng-controller="resultDetailsController" class="resultDetails">
 
-    asdasdasd
+    <div class="resultsTable">
+        <table class="resultDetails">
+            <tr ng-repeat="res in resultsData">
+                <td>{{res.date.hour + ":" + res.date.minute}}</td>
+                <td>{{res.value}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <ul uib-pagination items-per-page="10" total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"></ul>
 
 </div>

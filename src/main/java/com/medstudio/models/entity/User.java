@@ -23,11 +23,13 @@ import java.util.*;
     private String password;
     private String email;
     private Boolean enabled;
-    private Byte[] image;
+    @Lob
+    @Column(columnDefinition="blob")
+    private byte[] image;
 
-    @OneToMany
-    private Collection<Hospital> hospitals = new ArrayList<>();
+    @ManyToOne
+    private Hospital hospital;
 
-    @OneToMany
+    @ManyToMany
     private List<Role> roles = new ArrayList<>();
 }

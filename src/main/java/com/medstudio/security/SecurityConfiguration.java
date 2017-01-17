@@ -69,7 +69,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .httpBasic()
             .and()
                 .authorizeRequests()
-                .antMatchers("/index.html", "/home.html", "/login.html", "/js/*", "/", "/css/*", "/img/*", "/fonts/*", "/templates/*").permitAll()
+                .antMatchers("/getPatients/**").hasRole("DOC")
+                .antMatchers("/index.html", "/home.html", "/login.html","/js/*", "/js/*/*", "/", "/css/*", "/img/*", "/fonts/*", "/templates/*").permitAll()
                 .anyRequest().fullyAuthenticated()
             .and()
                 .formLogin()
@@ -78,10 +79,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .and()
                 .logout()
             .and()
-                .csrf().csrfTokenRepository(csrfTokenRepository())
-                //.csrf().disable();
-            .and()
-                .addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class);
+                //.csrf().csrfTokenRepository(csrfTokenRepository())
+                .csrf().disable();
+            //.and()
+                //.addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class);
 
     }
 

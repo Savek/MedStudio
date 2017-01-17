@@ -1,7 +1,7 @@
 
 angular
         .module(
-        'main', [ 'ngRoute', 'ngAnimate', 'ngTouch', 'ui.bootstrap']
+        'main', [ 'ngRoute', 'ngAnimate', 'ngTouch', 'ui.bootstrap', 'util']
         ).config(
             function($routeProvider, $httpProvider) {
 
@@ -9,11 +9,11 @@ angular
 
                 $routeProvider.when('/', {
                     templateUrl: 'home.html',
-                    controller: 'navigation',
+                    controller: 'loginController',
                     controllerAs: 'controller'
                 }).when('/login', {
                     templateUrl: 'login.html',
-                    controller: 'navigation',
+                    controller: 'loginController',
                     controllerAs: 'controller'
                 }).when('/admin', {
                     templateUrl: 'admin.html',

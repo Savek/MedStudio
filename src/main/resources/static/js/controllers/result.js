@@ -7,13 +7,12 @@ angular
             chartColors: ['#58a554'],
         });
     }])
-    .controller("LineCtrl", function ($scope, $http, $location, $routeParams) {
+    .controller("resultController", function ($scope, $http, $location, $routeParams) {
 
         $scope.onClick = function (points, evt) {
             var dateTemp = $scope.dt;
             dateTemp.setDate($scope.labels[points[0]._index]);
-            var dateParam = dateTemp.getFullYear() + "-" + (dateTemp.getMonth() + 1) + "-" + dateTemp.getDate();
-            $location.path( "/resultDetails/" + $routeParams.userId + "/" + $routeParams.resultType + "/" + dateParam );
+            $location.path( "/resultDetails/" + $routeParams.userId + "/" + $routeParams.resultType + "/" + $scope.dt.toISOString() );
             $scope.$apply();
         };
         $scope.datasetOverride = [{yAxisID: 'y-axis-1'}];
@@ -81,7 +80,7 @@ angular
 
         };
 
-        $scope.format = 'MMMM-yyyy';
+        $scope.format = 'MM-yyyy';
 
         $scope.popup2 = {
             opened: false

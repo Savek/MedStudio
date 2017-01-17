@@ -4,10 +4,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.orm.jpa.vendor.HibernateJpaSessionFactoryBean;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 @ComponentScan(basePackageClasses = MedStudioApplication.class)
 @RestController
 @EnableAutoConfiguration
+@EnableTransactionManagement
 public class MedStudioApplication {
 
 	@RequestMapping("/logoutUser")
@@ -32,5 +36,10 @@ public class MedStudioApplication {
 	public static void main(String[] args) {
 
         SpringApplication.run(MedStudioApplication.class, args);
+	}
+
+	@Bean
+	public HibernateJpaSessionFactoryBean sessionFactory() {
+		return new HibernateJpaSessionFactoryBean();
 	}
 }

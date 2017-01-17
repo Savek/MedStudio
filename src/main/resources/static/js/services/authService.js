@@ -2,13 +2,14 @@
  * Created by Savek on 2017-01-12.
  */
 angular.module('authModule', [])
-    .factory('authServiceFactory', function ($http, Session) {
+    .factory('authServiceFactory', function ($http, $location, Session) {
         var authService = {};
 
         authService.login = function (credentials) {
             return $http
                 .post('/login', credentials)
                 .then(function (res) {
+                    $location.path("/");
                     Session.create(res.data.id, res.data.user.id,
                         res.data.user.role);
                     return res.data.user;

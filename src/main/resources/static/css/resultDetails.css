@@ -1,0 +1,32 @@
+div.resultsTable {
+    height: 400px;
+}
+
+table.resultDetails {
+    margin: 0 auto;
+}
+
+table.resultDetails tr {
+    border-bottom: 1px solid #ccc;
+}
+
+table.resultDetails tr:last-child {
+    border-bottom: none;
+}
+
+table.resultDetails tr td{
+    padding: 10px 30px;
+}
+
+div.resultDetails {
+    text-align: center;
+}
+
+div.resultDetails .pagination > li > a {
+    color: #ccc;
+}
+
+div.resultDetails .pagination .active a{
+    background-color: #58a554;
+    border-color: #ccc;
+}

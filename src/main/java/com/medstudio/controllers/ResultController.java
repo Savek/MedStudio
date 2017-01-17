@@ -40,7 +40,7 @@ public class ResultController {
 
         List<Result> results = query
                 .from(result)
-                .where(result.user.eq(userId)
+                .where(result.user.id.eq(userId)
                         .and(result.date.month().eq(date.getMonthValue()))
                         .and(result.date.year().eq(date.getYear()))
                         .and(result.resultType.eq(resultType)))
@@ -59,6 +59,7 @@ public class ResultController {
     @RequestMapping("/getResultsDetails/{userId}/{resultType}")
     @ResponseBody
     public List resultsType(@PathVariable Long userId, @PathVariable Long resultType,
+                            @RequestParam(value="date")
                             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date) {
 
         QResult result = QResult.result;
@@ -66,7 +67,7 @@ public class ResultController {
 
         List<Result> results = query
                 .from(result)
-                .where(result.user.eq(userId)
+                .where(result.user.id.eq(userId)
                         .and(result.date.dayOfMonth().eq(date.getDayOfMonth()))
                         .and(result.resultType.eq(resultType)))
                 .orderBy(result.date.asc())

@@ -1,7 +1,7 @@
 
 <link rel="stylesheet" href="css/userDetails.css">
 
-<div>
+<div ng-controller="userDetailsController">
     <div ng-show="userUpdateSucess" class="alert alert-success">
         Pomyślnie zakutalizowano!
     </div>
@@ -39,13 +39,23 @@
 
                 <button type="submit" class="btn btn-default" ng-click="update(userUpdate)">Submit</button>
         </div>
+
+        <div class="hospitals col-md-12">
+            <p><i class="fa fa-home" aria-hidden="true"></i> {{user.hospital.name}}</p>
+            <p>{{user.hospital.city}}, {{user.hospital.adress}} {{user.hospital.passCode}} </p>
+        </div>
     </form>
 
-    <div>
-        {{hospital.name}}
-        {{bigTotalItems}}
-    </div>
-    <ul uib-pagination items-per-page="1" total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"></ul>
+
+        <a href="#/results/{{ user.id }}/{{RESULT_TYPES.pressure}}"><i class="fa fa-bar-chart" aria-hidden="true"></i> Ciśnienie </a>
+
+
+        <a href="#/results/{{ user.id }}/{{RESULT_TYPES.temperature}}"><i class="fa fa-thermometer-empty" aria-hidden="true"></i> Temperatura </a>
+
+
+        <a href="#/results/{{ user.id }}/{{RESULT_TYPES.pulse}}"><i class="fa fa-heart" aria-hidden="true"></i> Tętno </a>
+
+
 </div>
 
 
