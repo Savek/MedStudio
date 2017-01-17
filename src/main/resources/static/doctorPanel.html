@@ -1,0 +1,6 @@
+
+<div ng-controller="doctorPanelController">
+        <span ng-repeat="patient in patients">
+           <a href="#/userDetails/{{patient.id}}"><i class="fa fa-user" aria-hidden="true"></i> {{ patient.name + " " + patient.surname }}</a>
+        </span>
+</div>
