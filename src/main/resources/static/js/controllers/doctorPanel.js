@@ -8,7 +8,6 @@ angular
 
         $http.get('/getPatients/' + $routeParams.userId).then(function (response) {
 
-            console.log(response.data);
             $scope.patients = response.data;
         }, function () {
 

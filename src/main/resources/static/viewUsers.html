@@ -1,0 +1,17 @@
+
+<div ng-controller="usersPanelController" class="users-panel">
+        <div class="user-list">
+            <span ng-repeat="user in usersSliced" class="user-info">
+               <a href="#/userDetails/{{user.id}}"><i class="fa fa-user" aria-hidden="true"></i>
+                   <span>{{ user.name + " " + user.surname }}</span>
+                   <span ng-repeat="role in user.roles">
+                       <span ng-if = "role.role == 'ROLE_ADMIN'">- Administrator</span>
+                       <span ng-if = "role.role == 'ROLE_DOC'">- Doktor</span>
+                       <span ng-if = "role.role == 'ROLE_PATIENT'">- Pacjent</span>
+                    </span>
+               </a>
+            </span>
+        </div>
+
+        <ul uib-pagination items-per-page="10" total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"></ul>
+</div>

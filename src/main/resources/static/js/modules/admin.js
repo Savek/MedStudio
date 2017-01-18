@@ -18,6 +18,8 @@ angular
                 templateUrl: 'resultsDetails.html',
             }).when('/doctorPanel/:userId', {
                 templateUrl: 'doctorPanel.html',
+            }).when('/usersPanel', {
+                templateUrl: 'viewUsers.html',
             }).otherwise('/');
         }
     )
@@ -38,6 +40,22 @@ angular
                 if (response.data.enabled == true) {
                     $scope.authenticated = true;
                     $scope.user = response.data;
+
+                    $scope.isAdmin = false;
+                    $scope.isDoctor = false;
+                    $scope.isPatient = false;
+                    response.data.roles.forEach(function(iter) {
+                        if (iter.role === "ROLE_ADMIN") {
+                            $scope.isAdmin = true;
+                        }
+                        if (iter.role === "ROLE_DOC") {
+                            $scope.isDoctor = true;
+                        }
+                        if (iter.role === "ROLE_PATIENT") {
+                            $scope.isPatient = true;
+                        }
+                    });
+
                 }
             }, function () {
                 $location.path("/");
@@ -59,5 +77,7 @@ angular
                 };
                 reader.readAsDataURL(file);
             };
+
+            AuthService.login();
         }
     );

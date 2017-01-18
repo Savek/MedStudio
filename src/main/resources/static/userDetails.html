@@ -12,32 +12,32 @@
         <div class="col-md-6 userPhoto">
             <img id="userDetailsAvatar" src="data:image/png;base64,{{ userUpdate.image }}">
 
-            <input type="file" name="file" id="file" class="fileInput" ng-model="value" onchange="angular.element(this).scope().previewFile()"/>
-            <label for="file">Wybierz plik</label>
+            <input ng-if="myProfile || isAdmin" type="file" name="file" id="file" class="fileInput" ng-model="value" onchange="angular.element(this).scope().previewFile()"/>
+            <label ng-if="myProfile || isAdmin" for="file">Wybierz plik</label>
         </div>
         <div class="col-md-6 userDetails">
 
                 <div class="input-group">
                     <span class="input-group-addon" id="basic-addon1">Imię</span>
-                    <input type="text" class="form-control" value="{{ userUpdate.name }}" aria-describedby="basic-addon1" ng-model="userUpdate.name">
+                    <input ng-disabled="!myProfile && !isAdmin" type="text" class="form-control" value="{{ userUpdate.name }}" aria-describedby="basic-addon1" ng-model="userUpdate.name">
                 </div>
 
                 <div class="input-group">
                     <span class="input-group-addon" id="basic-addon2">Nazwisko</span>
-                    <input type="text" class="form-control" value="{{ userUpdate.surname }}" aria-describedby="basic-addon2" ng-model="userUpdate.surname">
+                    <input ng-disabled="!myProfile && !isAdmin" type="text" class="form-control" value="{{ userUpdate.surname }}" aria-describedby="basic-addon2" ng-model="userUpdate.surname">
                 </div>
 
                 <div class="input-group">
                     <span class="input-group-addon" id="basic-addon3">Email</span>
-                    <input type="text" class="form-control" value="{{ userUpdate.email }}" aria-describedby="basic-addon3" ng-model="userUpdate.email">
+                    <input ng-disabled="!myProfile && !isAdmin" type="text" class="form-control" value="{{ userUpdate.email }}" aria-describedby="basic-addon3" ng-model="userUpdate.email">
                 </div>
 
                 <div class="input-group">
                     <span class="input-group-addon" id="basic-addon4">Hasło</span>
-                    <input type="password" class="form-control" value="{{ userUpdate.password }}" aria-describedby="basic-addon4" ng-model="userUpdate.password">
+                    <input ng-disabled="!myProfile && !isAdmin" type="password" class="form-control" value="{{ userUpdate.password }}" aria-describedby="basic-addon4" ng-model="userUpdate.password">
                 </div>
 
-                <button type="submit" class="btn btn-default" ng-click="update(userUpdate)">Submit</button>
+                <button ng-if="myProfile || isAdmin" type="submit" class="btn btn-default" ng-click="update(userUpdate)">Submit</button>
         </div>
 
         <div class="hospitals col-md-12">
@@ -46,15 +46,13 @@
         </div>
     </form>
 
-
+    <div ng-show ="isDoctor" class="user-results col-md-12">
         <a href="#/results/{{ user.id }}/{{RESULT_TYPES.pressure}}"><i class="fa fa-bar-chart" aria-hidden="true"></i> Ciśnienie </a>
-
 
         <a href="#/results/{{ user.id }}/{{RESULT_TYPES.temperature}}"><i class="fa fa-thermometer-empty" aria-hidden="true"></i> Temperatura </a>
 
-
         <a href="#/results/{{ user.id }}/{{RESULT_TYPES.pulse}}"><i class="fa fa-heart" aria-hidden="true"></i> Tętno </a>
-
+    </div>
 
 </div>
 

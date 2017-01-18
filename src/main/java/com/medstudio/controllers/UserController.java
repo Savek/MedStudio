@@ -128,5 +128,20 @@ public class UserController {
 
         return patients;
     }
+
+    @RequestMapping("/getUsers")
+    @ResponseBody
+    public List<User> users() {
+
+        QUser user = QUser.user;
+        JPQLQuery query = new JPAQuery (entityManager);
+
+        List<User> users = query
+                .from(user)
+                .fetchAll()
+                .list(user);
+
+        return users;
+    }
 }
 

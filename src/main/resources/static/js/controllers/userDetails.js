@@ -9,6 +9,7 @@ angular
             $scope.userUpdateSucess = null;
         });
 
+        $scope.myProfile = angular.isUndefined($routeParams.userId);
         var restLink = angular.isUndefined($routeParams.userId)?"/userInfo":"/userInfo/"+$routeParams.userId;
         $http.get(restLink).then(function (response) {
             if (response.data.enabled == true) {

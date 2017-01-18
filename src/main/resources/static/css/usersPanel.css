@@ -1,0 +1,21 @@
+div.users-panel {
+    text-align: center;
+}
+
+div.users-panel span.user-info {
+    padding: 10px 20px;
+    display: block;
+}
+
+div.users-panel div.user-list {
+    height: 400px;
+}
+
+div.users-panel .pagination > li > a {
+    color: #ccc;
+}
+
+div.users-panel .pagination .active a{
+    background-color: #58a554;
+    border-color: #ccc;
+}

@@ -16,7 +16,7 @@ angular
                 .get('/user', {headers : headers})
                 .then(function (res) {
                     if (res.data.authenticated) {
-                        Session.create(res.data.details.sessionId, res.data.name,
+                        Session.create(res.data.name, res.data.name,
                             res.data.authorities);
                     }
                 });
@@ -27,14 +27,6 @@ angular
                 Session.destroy();
             }
             return !!$cookies.get("sessionMedStudio");
-        };
-
-        authService.isAuthorized = function (authorizedRoles) {
-            if (!angular.isArray(authorizedRoles)) {
-                authorizedRoles = [authorizedRoles];
-            }
-            return (authService.isAuthenticated() &&
-            authorizedRoles.indexOf(Session.userRole) !== -1);
         };
 
         authService.logout = function () {
@@ -51,9 +43,11 @@ angular
             this.id = sessionId;
             this.userId = userId;
             this.userRole = userRole;
+
             var today = new Date();
             var expiresValue = new Date(today);
             expiresValue.setMinutes(today.getMinutes() + 15);
+            $cookies.remove("sessionMedStudio");
             $cookies.put("sessionMedStudio", sessionId, {'expires' : expiresValue});
         };
 
@@ -61,6 +55,7 @@ angular
             this.id = null;
             this.userId = null;
             this.userRole = null;
+
             $cookies.remove("sessionMedStudio");
         };
     });

@@ -79,10 +79,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .and()
                 .logout()
             .and()
-                //.csrf().csrfTokenRepository(csrfTokenRepository())
-                .csrf().disable();
-            //.and()
-                //.addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class);
+                .csrf().csrfTokenRepository(csrfTokenRepository())
+                //.csrf().disable();
+            .and()
+                .addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class);
 
     }
 

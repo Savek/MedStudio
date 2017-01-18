@@ -34,6 +34,8 @@
     <script src="js/controllers/userDetails.js"></script>
     <link rel="stylesheet" href="css/resultDetails.css">
     <script src="js/controllers/doctorPanel.js"></script>
+    <script src="js/controllers/usersPanel.js"></script>
+    <link rel="stylesheet" href="css/usersPanel.css">
 
 
 </head>
@@ -62,29 +64,29 @@
                 <img src="data:image/png;base64,{{ user.image }}">
             </li>
             <li class="logout">
-                <a href="" ng-click="adCont.logout()"><i class="fa fa-power-off" aria-hidden="true"></i></a>
+                <a href="" ng-click="logout()"><i class="fa fa-power-off" aria-hidden="true"></i></a>
             </li>
         </ul>
     </div>
     <div class="logged-menu container-fluid col-md-2">
         <ul class="nav navbar-main-menu navbar-left">
-            <li>
+            <li ng-if ="isPatient">
                 <a href="#/results/{{ user.id }}/{{RESULT_TYPES.pressure}}"><i class="fa fa-bar-chart" aria-hidden="true"></i> Ciśnienie </a>
             </li>
-            <li>
+            <li ng-if ="isPatient">
                 <a href="#/results/{{ user.id }}/{{RESULT_TYPES.temperature}}"><i class="fa fa-thermometer-empty" aria-hidden="true"></i> Temperatura </a>
             </li>
-            <li>
+            <li ng-if ="isPatient">
                 <a href="#/results/{{ user.id }}/{{RESULT_TYPES.pulse}}"><i class="fa fa-heart" aria-hidden="true"></i> Tętno </a>
             </li>
-            <li>
-                <a href="#/doctorPanel/{{ user.id }}"><i class="fa fa-list" aria-hidden="true"></i> Przeglądaj </a>
+            <li ng-if ="isDoctor">
+                <a href="#/doctorPanel/{{ user.id }}"><i class="fa fa-list" aria-hidden="true"></i> Przeglądaj Pacjentów </a>
             </li>
-            <li>
-                <i class="fa fa-power-off" aria-hidden="true"></i> Aministration
+            <li ng-if ="isAdmin">
+                <a href="#/doctorPanel/{{ user.id }}"><i class="fa fa-plus" aria-hidden="true"></i> Dodaj Użytkownika </a>
             </li>
-            <li>
-                <i class="fa fa-power-off" aria-hidden="true"></i> Aministration
+            <li ng-if ="isAdmin">
+                <a href="#/usersPanel"><i class="fa fa-list" aria-hidden="true"></i> Przeglądaj Użytkowników  </a>
             </li>
         </ul>
     </div>
@@ -92,6 +94,5 @@
 
     </div>
 </div>
-
 </body>
 </html>
