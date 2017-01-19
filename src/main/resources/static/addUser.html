@@ -1,0 +1,37 @@
+<div ng-controller="addUserPanelController" class="users-panel">
+    <form name="newUserForm" ng-submit="addNewUser()">
+
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">Imię</span>
+            <input type="text" class="form-control" aria-describedby="basic-addon1" ng-model="newUser.name">
+        </div>
+
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon2">Nazwisko</span>
+            <input type="text" class="form-control" aria-describedby="basic-addon2" ng-model="newUser.surname">
+        </div>
+
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon3">Email</span>
+            <input type="text" class="form-control" aria-describedby="basic-addon3" ng-model="newUser.email">
+        </div>
+
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon4">Hasło</span>
+            <input type="password" class="form-control" aria-describedby="basic-addon4" ng-model="newUser.password">
+        </div>
+
+        <div class="form-group">
+            <label id="hospitalSelect"> Single select: </label><br>
+            <select ng-repeat="hospital in hospitals" name="hospitalSelect" ng-model="newUser.hostpital">
+                <option value="hospital">{{hospital.name + " " + hospital.city}}</option>
+            </select><br>
+        </div>
+
+        <div ng-repeat="role in roles">
+            <input type="radio" ng-model="newUser.roles" name="area" value="{{role.role}}">
+        </div>
+
+        <button type="submit" class="btn btn-default">Dodaj</button>
+    </form>
+</div>

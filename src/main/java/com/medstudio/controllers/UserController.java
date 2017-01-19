@@ -4,6 +4,7 @@ package com.medstudio.controllers;
  * Created by Savek on 2016-12-17.
  */
 
+import com.medstudio.models.entity.QRole;
 import com.medstudio.models.entity.QUser;
 import com.medstudio.models.entity.Role;
 import com.medstudio.models.entity.User;
@@ -142,6 +143,21 @@ public class UserController {
                 .list(user);
 
         return users;
+    }
+
+    @RequestMapping("/getRoles")
+    @ResponseBody
+    public List<User> roles() {
+
+        QRole role = QRole.role1;
+        JPQLQuery query = new JPAQuery (entityManager);
+
+        List<Role> roles = query
+                .from(role)
+                .fetchAll()
+                .list(role);
+
+        return roles;
     }
 }
 
