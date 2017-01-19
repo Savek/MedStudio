@@ -4,16 +4,16 @@ package com.medstudio.controllers;
  * Created by Savek on 2016-12-17.
  */
 
-import com.medstudio.models.entity.QRole;
-import com.medstudio.models.entity.QUser;
-import com.medstudio.models.entity.Role;
-import com.medstudio.models.entity.User;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.medstudio.models.entity.*;
 import com.medstudio.models.repository.UserRepository;
 import com.mysema.query.jpa.JPQLQuery;
 import com.mysema.query.jpa.hibernate.HibernateSubQuery;
 import com.mysema.query.jpa.hibernate.HibernateUpdateClause;
 import com.mysema.query.jpa.impl.JPAQuery;
 import org.hibernate.SessionFactory;
+import org.hibernate.annotations.SQLInsert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
@@ -21,16 +21,16 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.io.IOException;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Controller
@@ -68,7 +68,7 @@ public class UserController {
 
         Boolean isAdminOrDoc = ((UserDetails) auth.getPrincipal()).getAuthorities()
                 .stream().map(GrantedAuthority::toString).reduce("", String::concat).matches("ROLE_DOC|ROLE_ADMIN");
-        System.out.println("isAdminOrDoc " + isAdminOrDoc.toString());
+
         if (isAdminOrDoc) {
             QUser user = QUser.user;
             JPQLQuery query = new JPAQuery (entityManager);
@@ -124,10 +124,17 @@ public class UserController {
                 .where(user.hospital.in(new HibernateSubQuery().from(user).where(user.id.eq(userId)).list(user.hospital)))
                 .list(user)
                 .stream()
-                .filter(user1 -> user1.getRoles().stream().map(Role::toString).reduce("", String::concat).contains("ROLE_PATIENT"))
+                .filter(user1 -> user1.getRole().getRole().equals("ROLE_PATIENT"))
                 .collect(Collectors.toList());
 
         return patients;
+    }
+
+    @RequestMapping("/deleteUserFromDB/{userId}")
+    @ResponseBody
+    public void deleteUser(@PathVariable Long userId) {
+
+        repo.delete(userId);
     }
 
     @RequestMapping("/getUsers")
@@ -147,7 +154,7 @@ public class UserController {
 
     @RequestMapping("/getRoles")
     @ResponseBody
-    public List<User> roles() {
+    public List<Role> roles() {
 
         QRole role = QRole.role1;
         JPQLQuery query = new JPAQuery (entityManager);
@@ -158,6 +165,57 @@ public class UserController {
                 .list(role);
 
         return roles;
+    }
+
+    @RequestMapping("/addUserToDB")
+    @ResponseBody
+    public void addUser(@RequestBody String user) {
+
+        ObjectMapper mapper = new ObjectMapper();
+        JPQLQuery query = new JPAQuery (entityManager);
+
+        QHospital hospital = QHospital.hospital;
+        QRole role = QRole.role1;
+
+        try {
+            Map<String, String> jsonInfo = mapper.readValue(user, new TypeReference<Map<String, String>>(){});
+            System.out.println(jsonInfo.toString());
+            User newUser = new User();
+            newUser.setName(jsonInfo.get("name"));
+            newUser.setSurname(jsonInfo.get("surname"));
+            newUser.setEmail(jsonInfo.get("email"));
+            newUser.setLogin(jsonInfo.get("login"));
+            newUser.setPassword(jsonInfo.get("password"));
+            newUser.setEnabled(Boolean.valueOf(jsonInfo.get("enabled")));
+
+            List<Hospital> hosp;
+            if (jsonInfo.get("hospital_id") != null) {
+                hosp = query
+                        .from(hospital)
+                        .where(hospital.id.eq(Long.valueOf(jsonInfo.get("hospital_id"))))
+                        .limit(1)
+                        .list(hospital);
+
+                if (hosp.size() > 0) newUser.setHospital(hosp.get(0));
+            }
+
+            List<Role> rol;
+            if (jsonInfo.get("role_id") != null) {
+
+                rol = query
+                        .from(role)
+                        .where(role.id.eq(Long.valueOf(jsonInfo.get("role_id"))))
+                        .limit(1)
+                        .list(role);
+
+                if (rol.size() > 0) newUser.setRole(rol.get(0));
+            }
+
+            repo.save(newUser);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
 

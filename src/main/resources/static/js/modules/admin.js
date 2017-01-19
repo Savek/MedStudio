@@ -20,6 +20,8 @@ angular
                 templateUrl: 'doctorPanel.html',
             }).when('/usersPanel', {
                 templateUrl: 'viewUsers.html',
+            }).when('/addUser', {
+                templateUrl: 'addUser.html',
             }).otherwise('/');
         }
     )
@@ -29,14 +31,10 @@ angular
             $scope.RESULT_TYPES = RESULT_TYPES;
 
             $scope.logout = function () {
-
-                AuthService.logout()
-                    .then(function() {
-                        $location.path("/");
-                    })
+                AuthService.logout();
             };
 
-            $http.post('/userInfo').then(function (response) {
+            $http.get('/userInfo').then(function (response) {
                 if (response.data.enabled == true) {
                     $scope.authenticated = true;
                     $scope.user = response.data;
@@ -44,17 +42,15 @@ angular
                     $scope.isAdmin = false;
                     $scope.isDoctor = false;
                     $scope.isPatient = false;
-                    response.data.roles.forEach(function(iter) {
-                        if (iter.role === "ROLE_ADMIN") {
-                            $scope.isAdmin = true;
-                        }
-                        if (iter.role === "ROLE_DOC") {
-                            $scope.isDoctor = true;
-                        }
-                        if (iter.role === "ROLE_PATIENT") {
-                            $scope.isPatient = true;
-                        }
-                    });
+                    if ($scope.user.role.role === "ROLE_ADMIN") {
+                        $scope.isAdmin = true;
+                    }
+                    if ($scope.user.role.role === "ROLE_DOC") {
+                        $scope.isDoctor = true;
+                    }
+                    if ($scope.user.role.role === "ROLE_PATIENT") {
+                        $scope.isPatient = true;
+                    }
 
                 }
             }, function () {

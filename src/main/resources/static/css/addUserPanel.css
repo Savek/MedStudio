@@ -1,0 +1,38 @@
+div.addUserPanel {
+    text-align: center;
+    padding-top: 60px;
+}
+
+div.addUserPanel .input-group {
+    margin: 5px auto;
+    width: 80%;
+}
+
+div.addUserPanel .form-group {
+    margin: 5px auto;
+    width: 70%;
+}
+
+div.addUserPanel .hospital {
+    margin: 0 auto;
+    width: 70%;
+}
+
+div.addUserPanel .form-control:focus, div.addUserPanel .form-control:active {
+    border-color: #58a554;
+}
+
+div.addUserPanel .input-group-addon {
+    width: 25%;
+}
+
+div.addUserPanel button {
+    background-color: #58a554;
+    color: #fff;
+    margin-top: 40px;
+}
+
+div.addUserPanel button:hover, div.userDetails button:active, div.userDetails button:focus {
+    background-color: #64b160;
+    color: #fff;
+}

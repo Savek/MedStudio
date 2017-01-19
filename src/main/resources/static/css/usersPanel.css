@@ -19,3 +19,64 @@ div.users-panel .pagination .active a{
     background-color: #58a554;
     border-color: #ccc;
 }
+
+div.users-panel table {
+    margin: 0 auto;
+    width: 100%;
+}
+
+div.users-panel table tr {
+    border-bottom: 1px solid #ccc;
+}
+
+div.users-panel table tr th {
+    text-align: center;
+}
+
+div.users-panel table tr:last-child {
+    border-bottom: none;
+}
+
+div.users-panel tr td, div.users-panel tr th{
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+div.users-panel table tr td:nth-child(1), div.users-panel table tr th:nth-child(1) {
+    width: 10%;
+}
+
+div.users-panel table tr td:nth-child(2), div.users-panel table tr th:nth-child(2) {
+    width: 50%;
+}
+
+div.users-panel table tr td:nth-child(3), div.users-panel table tr th:nth-child(3) {
+    width: 20%;
+}
+
+div.users-panel table tr td:nth-child(4), div.users-panel table tr th:nth-child(4) {
+    width: 10%;
+}
+
+div.users-panel table tr td:nth-child(5), div.users-panel table tr th:nth-child(5) {
+    width: 10%;
+}
+
+div.users-panel table tr td.close-icon span {
+    color: red;
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+div.users-panel table tr td.close-icon span:hover {
+    opacity: 1;
+}
+
+div.users-panel table tr td.view a {
+    color: #58a554;
+    opacity: 0.7;
+}
+
+div.users-panel table tr td.view a:hover {
+    opacity: 1;
+}

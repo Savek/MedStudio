@@ -3,7 +3,7 @@
  */
 angular
     .module('util', ['ngCookies'])
-    .factory('AuthService', function ($http, $location, $cookies, Session) {
+    .factory('AuthService', function ($http, $location, $cookies, $route, Session) {
         var authService = {};
 
         authService.login = function (credentials) {
@@ -30,8 +30,9 @@ angular
         };
 
         authService.logout = function () {
-            return $http.post('/logoutUser', {}).then(function () {
+            return $http.post('logout', {}).finally(function() {
                 Session.destroy();
+                $route.reload();
             });
         };
 

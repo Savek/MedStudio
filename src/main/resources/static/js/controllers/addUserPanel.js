@@ -12,13 +12,16 @@ angular
             $scope.roles = response.data;
         });
 
+        $scope.succes = null;
+
         $scope.addNewUser = function() {
-            var data=$scope.fields;
 
-            $http.get('/addUser', data).then(function (response) {
+            var data = $scope.newUser;
 
+            $http.post('/addUserToDB', data).then(function () {
+                $scope.succes = true;
             }, function () {
-
+                $scope.succes = false;
             });
         };
 

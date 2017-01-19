@@ -1,37 +1,62 @@
-<div ng-controller="addUserPanelController" class="users-panel">
+<div ng-controller="addUserPanelController" class="addUserPanel">
+    <div ng-show="succes == true" class="alert alert-success">
+        Dodano użytkownika
+    </div>
+    <div ng-show="succes == false" class="alert alert-danger">
+        Wystąpił błąd!
+    </div>
     <form name="newUserForm" ng-submit="addNewUser()">
 
-        <div class="input-group">
-            <span class="input-group-addon" id="basic-addon1">Imię</span>
-            <input type="text" class="form-control" aria-describedby="basic-addon1" ng-model="newUser.name">
+        <div class="col-md-6">
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">Imię</span>
+                <input type="text" class="form-control" aria-describedby="basic-addon1" ng-model="newUser.name">
+            </div>
+
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon2">Nazwisko</span>
+                <input type="text" class="form-control" aria-describedby="basic-addon2" ng-model="newUser.surname">
+            </div>
+
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon3">Email</span>
+                <input type="text" class="form-control" aria-describedby="basic-addon3" ng-model="newUser.email">
+            </div>
+
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon4">Login</span>
+                <input type="text" class="form-control" aria-describedby="basic-addon4" ng-model="newUser.login">
+            </div>
+
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon5">Hasło</span>
+                <input type="password" class="form-control" aria-describedby="basic-addon5" ng-model="newUser.password">
+            </div>
         </div>
 
-        <div class="input-group">
-            <span class="input-group-addon" id="basic-addon2">Nazwisko</span>
-            <input type="text" class="form-control" aria-describedby="basic-addon2" ng-model="newUser.surname">
+        <div class="col-md-6">
+
+            <div class="form-group">
+                <label id="hospitalSelect"> Szpital: </label><br>
+                <select name="hospitalSelect" ng-model="newUser.hospital_id" class="form-control hospital">
+                    <option ng-repeat="hospital in hospitals" value="{{hospital.id}}">{{hospital.name + " " + hospital.city}}</option>
+                </select><br>
+            </div>
+
+            <div ng-repeat="role in roles">
+                <input type="radio" ng-model="newUser.role_id" id="{{role.id}}" value="{{role.id}}">
+                <label for="{{role.id}}">{{role.role}}</label>
+            </div>
+
+            <div class="input-group">
+                <input type="checkbox" ng-model="newUser.enabled" id="enabled" value="true">
+                <label for="enabled">Aktywny</label>
+            </div>
         </div>
 
-        <div class="input-group">
-            <span class="input-group-addon" id="basic-addon3">Email</span>
-            <input type="text" class="form-control" aria-describedby="basic-addon3" ng-model="newUser.email">
+        <div class="col-md-12">
+            <button type="submit" class="btn btn-default">Dodaj Użytkownika</button>
         </div>
 
-        <div class="input-group">
-            <span class="input-group-addon" id="basic-addon4">Hasło</span>
-            <input type="password" class="form-control" aria-describedby="basic-addon4" ng-model="newUser.password">
-        </div>
-
-        <div class="form-group">
-            <label id="hospitalSelect"> Single select: </label><br>
-            <select ng-repeat="hospital in hospitals" name="hospitalSelect" ng-model="newUser.hostpital">
-                <option value="hospital">{{hospital.name + " " + hospital.city}}</option>
-            </select><br>
-        </div>
-
-        <div ng-repeat="role in roles">
-            <input type="radio" ng-model="newUser.roles" name="area" value="{{role.role}}">
-        </div>
-
-        <button type="submit" class="btn btn-default">Dodaj</button>
     </form>
 </div>

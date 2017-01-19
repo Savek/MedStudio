@@ -36,6 +36,8 @@
     <script src="js/controllers/doctorPanel.js"></script>
     <script src="js/controllers/usersPanel.js"></script>
     <link rel="stylesheet" href="css/usersPanel.css">
+    <script src="js/controllers/addUserPanel.js"></script>
+    <link rel="stylesheet" href="css/addUserPanel.css">
 
 
 </head>
@@ -64,7 +66,7 @@
                 <img src="data:image/png;base64,{{ user.image }}">
             </li>
             <li class="logout">
-                <a href="" ng-click="logout()"><i class="fa fa-power-off" aria-hidden="true"></i></a>
+                <span ng-click="logout()"><i class="fa fa-power-off fa-2x" aria-hidden="true"></i></span>
             </li>
         </ul>
     </div>
@@ -83,7 +85,7 @@
                 <a href="#/doctorPanel/{{ user.id }}"><i class="fa fa-list" aria-hidden="true"></i> Przeglądaj Pacjentów </a>
             </li>
             <li ng-if ="isAdmin">
-                <a href="#/doctorPanel/{{ user.id }}"><i class="fa fa-plus" aria-hidden="true"></i> Dodaj Użytkownika </a>
+                <a href="#/addUser"><i class="fa fa-plus" aria-hidden="true"></i> Dodaj Użytkownika </a>
             </li>
             <li ng-if ="isAdmin">
                 <a href="#/usersPanel"><i class="fa fa-list" aria-hidden="true"></i> Przeglądaj Użytkowników  </a>

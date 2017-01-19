@@ -57,8 +57,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(passwordEncoder())
                 .usersByUsernameQuery("select login as username, password, enabled FROM user where login = ?")
                 .authoritiesByUsernameQuery("select u.login as username, r.role as role_name from role r" +
-                                " join user_roles ur on r.id = ur.roles_id " +
-                                " join user u on ur.user_id = u.id" +
+                                " join user u on u.role_id = r.id" +
                         " where u.login = ?");
     }
 

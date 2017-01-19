@@ -19,4 +19,5 @@ import javax.persistence.*;
     private String city;
     private String adress;
     private String passCode;
+
 }

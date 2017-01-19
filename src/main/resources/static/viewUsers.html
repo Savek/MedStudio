@@ -1,16 +1,40 @@
 
 <div ng-controller="usersPanelController" class="users-panel">
         <div class="user-list">
-            <span ng-repeat="user in usersSliced" class="user-info">
-               <a href="#/userDetails/{{user.id}}"><i class="fa fa-user" aria-hidden="true"></i>
-                   <span>{{ user.name + " " + user.surname }}</span>
-                   <span ng-repeat="role in user.roles">
-                       <span ng-if = "role.role == 'ROLE_ADMIN'">- Administrator</span>
-                       <span ng-if = "role.role == 'ROLE_DOC'">- Doktor</span>
-                       <span ng-if = "role.role == 'ROLE_PATIENT'">- Pacjent</span>
-                    </span>
-               </a>
-            </span>
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Imię i Nazwisko</th>
+                        <th>Rola</th>
+                    </tr>
+                </thead>
+                    <tr ng-repeat="user in usersSliced" class="user-info">
+
+                        <td>
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                        </td>
+
+                        <td>
+                            {{ user.name + " " + user.surname }}
+                        </td>
+
+                        <td>
+                            <span ng-if = "user.role.role == 'ROLE_ADMIN'">Administrator</span>
+                            <span ng-if = "user.role.role == 'ROLE_DOC'">Doktor</span>
+                            <span ng-if = "user.role.role == 'ROLE_PATIENT'">Pacjent</span>
+                        </td>
+
+                        <td class="view">
+                            <a href="#/userDetails/{{user.id}}"><i class="fa fa-eye fa-2x" aria-hidden="true"></i></a>
+                        </td>
+
+                        <td class="close-icon">
+                            <span ng-click="deleteUser(user.id)"><i class="fa fa-close fa-2x" aria-hidden="true"></i></span>
+                        </td>
+
+                    </tr>
+            </table>
         </div>
 
         <ul uib-pagination items-per-page="10" total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"></ul>

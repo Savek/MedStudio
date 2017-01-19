@@ -28,8 +28,10 @@ import java.util.*;
     private byte[] image;
 
     @ManyToOne
+    @JoinColumn(name = "hospital_id")
     private Hospital hospital;
 
-    @ManyToMany
-    private List<Role> roles = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
 }
