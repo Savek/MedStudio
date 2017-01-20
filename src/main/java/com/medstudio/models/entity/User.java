@@ -19,6 +19,7 @@ import java.util.*;
 
     private String name;
     private String surname;
+    @Column(unique = true)
     private String login;
     private String password;
     private String email;

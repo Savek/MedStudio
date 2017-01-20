@@ -46,7 +46,7 @@
         </div>
     </form>
 
-    <div ng-show ="isDoctor" class="user-results col-md-12">
+    <div ng-show ="isDoctor && !myProfile" class="user-results col-md-12">
         <a href="#/results/{{ user.id }}/{{RESULT_TYPES.pressure}}"><i class="fa fa-bar-chart" aria-hidden="true"></i> Ciśnienie </a>
 
         <a href="#/results/{{ user.id }}/{{RESULT_TYPES.temperature}}"><i class="fa fa-thermometer-empty" aria-hidden="true"></i> Temperatura </a>

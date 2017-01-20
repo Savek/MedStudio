@@ -38,8 +38,8 @@ div.users-panel table tr:last-child {
 }
 
 div.users-panel tr td, div.users-panel tr th{
-    padding-top: 8px;
-    padding-bottom: 8px;
+    padding-top: 4px;
+    padding-bottom: 4px;
 }
 
 div.users-panel table tr td:nth-child(1), div.users-panel table tr th:nth-child(1) {

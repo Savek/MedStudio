@@ -21,6 +21,8 @@ angular
                 });
             };
 
+            AuthService.login();
+
             self.logout = function() {
 
                 AuthService.logout()

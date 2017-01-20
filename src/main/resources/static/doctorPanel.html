@@ -1,6 +1,30 @@
 
-<div ng-controller="doctorPanelController">
-        <span ng-repeat="patient in patients">
-           <a href="#/userDetails/{{patient.id}}"><i class="fa fa-user" aria-hidden="true"></i> {{ patient.name + " " + patient.surname }}</a>
-        </span>
+<div ng-controller="doctorPanelController" class="users-panel">
+    <div class="user-list">
+        <table>
+            <thead>
+            <tr>
+                <th></th>
+                <th>Imię i Nazwisko</th>
+            </tr>
+            </thead>
+            <tr ng-repeat="user in patientsSliced" class="user-info">
+
+                <td>
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                </td>
+
+                <td>
+                    {{ user.name + " " + user.surname }}
+                </td>
+
+                <td class="view">
+                    <a href="#/userDetails/{{user.id}}"><i class="fa fa-eye fa-2x" aria-hidden="true"></i></a>
+                </td>
+
+            </tr>
+        </table>
+    </div>
+
+    <ul uib-pagination items-per-page="10" total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"></ul>
 </div>

@@ -68,7 +68,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .httpBasic()
             .and()
                 .authorizeRequests()
-                .antMatchers("/getPatients/**").hasRole("DOC")
                 .antMatchers("/index.html", "/home.html", "/login.html","/js/*", "/js/*/*", "/", "/css/*", "/img/*", "/fonts/*", "/templates/*").permitAll()
                 .anyRequest().fullyAuthenticated()
             .and()
