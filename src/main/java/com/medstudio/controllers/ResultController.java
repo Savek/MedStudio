@@ -39,7 +39,13 @@ public class ResultController {
         QResult result = QResult.result;
         JPQLQuery query = new JPAQuery (entityManager);
 
-        List<Timestamp> results = query
+//        Map finalResults = results.stream()
+//                .collect(groupingBy(Result::getDate,
+//                        TreeMap::new,
+//                        averagingLong(Result::getValue)
+//                        ));
+
+        return query
                 .from(result)
                 .where(result.user.id.eq(userId)
                         .and(result.date.month().eq(date.getMonthValue()))
@@ -51,14 +57,6 @@ public class ResultController {
                 .stream()
                 .map(localDateTime -> Timestamp.valueOf(localDateTime))
                 .collect(toList());
-
-//        Map finalResults = results.stream()
-//                .collect(groupingBy(Result::getDate,
-//                        TreeMap::new,
-//                        averagingLong(Result::getValue)
-//                        ));
-
-        return results;
     }
 
     @RequestMapping("/getResultsDetails/{userId}/{resultType}")

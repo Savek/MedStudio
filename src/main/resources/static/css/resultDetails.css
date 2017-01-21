@@ -2,12 +2,16 @@ div.resultsTable {
     height: 400px;
 }
 
-div.resultsTable {
+div.chart .chart {
     height: 400px;
 }
 
 table.resultDetails {
     margin: 0 auto;
+}
+
+table.resultDetails th {
+    padding: 0px 10px;
 }
 
 table.resultDetails tr {
@@ -19,7 +23,7 @@ table.resultDetails tr:last-child {
 }
 
 table.resultDetails tr td{
-    padding: 10px 30px;
+    padding: 8px 30px;
 }
 
 div.resultDetails {
