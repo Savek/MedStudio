@@ -2,7 +2,8 @@
 <div ng-controller="resultController">
 
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-6">
+            <span>Wybierz miesiąc i rok</span>
             <p class="input-group">
                 <input type="text" class="form-control" uib-datepicker-popup="{{format}}"
                        ng-model="dt" is-open="popup2.opened" datepicker-options="dateOptions"
@@ -15,11 +16,8 @@
         </div>
     </div>
 
-    <div class="chart">
-        <canvas id="line" height="70" class="chart chart-line" chart-data="data"
-                chart-labels="labels" chart-series="series" chart-options="options"
-                chart-dataset-override="datasetOverride" chart-colors="colors" chart-click="onClick">
-        </canvas>
+    <div class="resultsDays week">
+        <span ng-repeat="day in days" class="col-md-1" ng-click="onClick(day)"> {{ day | date:"dd-MM" }}</span>
     </div>
 
 </div>

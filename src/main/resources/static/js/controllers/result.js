@@ -9,25 +9,10 @@ angular
     }])
     .controller("resultController", function ($scope, $http, $location, $routeParams) {
 
-        $scope.onClick = function (points, evt) {
-            var dateTemp = $scope.dt;
-            dateTemp.setDate($scope.labels[points[0]._index]);
-            $location.path( "/resultDetails/" + $routeParams.userId + "/" + $routeParams.resultType + "/" + $scope.dt.toISOString() );
-            $scope.$apply();
-        };
-        $scope.datasetOverride = [{yAxisID: 'y-axis-1'}];
-
-        $scope.options = {
-            scales: {
-                yAxes: [
-                    {
-                        id: 'y-axis-1',
-                        type: 'linear',
-                        display: true,
-                        position: 'left'
-                    },
-                ]
-            }
+        $scope.onClick = function (day) {
+            var date = new Date(day);
+            $location.path( "/resultDetails/" + $routeParams.userId + "/" + $routeParams.resultType + "/" + date.toISOString() );
+            //$scope.$apply();
         };
 
         $scope.dt = new Date();
@@ -54,30 +39,17 @@ angular
             $scope.popup2.opened = true;
         };
 
-        $scope.colors = ['#58a554'];
         $scope.chart = function() {
 
-            $scope.labels = [];
-            $scope.data = [];
-            $scope.dataTemp = [];
             $http.get('/getResultsMonthAndYear/'+ $routeParams.userId + '/' + $routeParams.resultType, {params:{"date": $scope.dt}})
                 .then(function (response) {
-                    $scope.dataTemp = [];
-                    angular.forEach(response.data, function(value, key) {
-                        var dateTemp = new Date(key);
-                        $scope.labels.push(dateTemp.getDate());
-                        $scope.dataTemp.push(value);
-                    });
-                    $scope.data.push($scope.dataTemp);
-                }, function () {
-
+                    $scope.days = response.data;
                 });
         };
         $scope.chart();
 
         $scope.setDate = function(year, month, day) {
             $scope.dt = new Date(year, month, day);
-
         };
 
         $scope.format = 'MM-yyyy';

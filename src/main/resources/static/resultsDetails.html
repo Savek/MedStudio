@@ -1,15 +1,29 @@
 
 <div ng-controller="resultDetailsController" class="resultDetails">
 
-    <div class="resultsTable">
+    <div class="resultsTable col-md-4">
         <table class="resultDetails">
-            <tr ng-repeat="res in resultsData">
-                <td>{{res.date.hour + ":" + res.date.minute}}</td>
-                <td>{{res.value}}</td>
+            <thead>
+                <tr>
+                    <th>Godzina pomiaru</th>
+                    <th>Wartość</th>
+                </tr>
+            </thead>
+            <tr ng-repeat="key in resultsData">
+                <td>{{ key | date:"HH:mm:ss"}}</td>
+                <td>{{ resultsDataAll[key] }}</td>
             </tr>
         </table>
     </div>
 
-    <ul uib-pagination items-per-page="10" total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"></ul>
+    <div class="chart col-md-8">
+        <canvas id="line" height="70" class="chart chart-line" chart-data="data"
+                chart-labels="labels" chart-series="series" chart-options="options"
+                chart-dataset-override="datasetOverride" chart-colors="colors">
+        </canvas>
 
+
+    <div class="chart col-md-12">
+        <ul uib-pagination items-per-page="10" total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"></ul>
+    </div>
 </div>

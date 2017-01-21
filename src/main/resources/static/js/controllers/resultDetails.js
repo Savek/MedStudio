@@ -3,25 +3,50 @@
  */
 angular
     .module('admin')
-    .controller('resultDetailsController', function ($scope, $http, $routeParams, RESULT_TYPES) {
+    .controller('resultDetailsController', function ($scope, $filter, $http, $routeParams, RESULT_TYPES) {
 
-        $scope.resultsDataAll = [];
-        $scope.resultsData = [];
-        $http.get('/getResultsDetails/'+ $routeParams.userId + '/' + $routeParams.resultType, {params:{"date": $routeParams.date}})
-            .then(function (response) {
+        $scope.currentPage = 1;
+        $scope.pageChanged = function() {
+            $scope.chart();
+        };
 
-                $scope.serviceData = [];
-                angular.forEach(response.data, function(value) {
+        $scope.datasetOverride = [{yAxisID: 'y-axis-1'}];
+
+        $scope.options = {
+            scales: {
+                yAxes: [
+                    {
+                        id: 'y-axis-1',
+                        type: 'linear',
+                        display: true,
+                        position: 'left'
+                    },
+                ]
+            }
+        };
+
+        $scope.colors = ['#58a554'];
+        $scope.chart = function() {
+
+            $scope.labels = [];
+            $scope.data = [];
+            $scope.resultsDataAll = [];
+            $scope.resultsData = [];
+            var dataTemp = []; // charts need double arrays, so we need to create one and then push it to main array
+            $http.get('/getResultsDetails/'+ $routeParams.userId + '/' + $routeParams.resultType, {params:{"date": $routeParams.date}})
+                .then(function (response) {
 
                     $scope.resultsDataAll = response.data;
-                    $scope.totalItems = response.data.length;
-                    $scope.currentPage = 1;
-                    $scope.resultsData = $scope.resultsDataAll.slice(0, 10);
+
+                    $scope.resultsData = Object.keys($scope.resultsDataAll).slice(($scope.currentPage - 1) * 10, $scope.currentPage * 10);
+                    $scope.totalItems = Object.keys($scope.resultsDataAll).length;
+                    angular.forEach($scope.resultsData, function(key) {
+                        $scope.labels.push($filter('date')(new Date(key), "HH:mm:ss"));
+                        dataTemp.push($scope.resultsDataAll[key]);
+                    });
+                    $scope.data.push(dataTemp);
                 });
-
-            });
-
-        $scope.pageChanged = function() {
-            $scope.resultsData = $scope.resultsDataAll.slice(($scope.currentPage - 1) * 10, $scope.currentPage * 10);
         };
+        $scope.chart();
+
     });

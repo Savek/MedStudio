@@ -2,6 +2,10 @@ div.resultsTable {
     height: 400px;
 }
 
+div.resultsTable {
+    height: 400px;
+}
+
 table.resultDetails {
     margin: 0 auto;
 }

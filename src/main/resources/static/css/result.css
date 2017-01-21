@@ -1,0 +1,25 @@
+@media (min-width: 768px){
+    .week .col-md-1{
+        width: 100%;
+    }
+}
+
+@media (min-width: 992px) {
+    .week .col-md-1{
+        width: 14.285714285714285714285714285714%;
+    }
+}
+
+.week .col-md-1 {
+    background-color: #58A554;
+    padding: 20px;
+    margin: 1%;
+    border-radius: 5px;
+    color: #fff;
+    opacity: 0.9;
+    cursor: pointer;
+}
+
+.week .col-md-1:hover {
+    opacity: 1;
+}

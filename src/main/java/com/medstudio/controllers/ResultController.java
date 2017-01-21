@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -31,48 +32,52 @@ public class ResultController {
 
     @RequestMapping("/getResultsMonthAndYear/{userId}/{resultType}")
     @ResponseBody
-    public Map results(@PathVariable Long userId, @PathVariable Long resultType,
+    public List results(@PathVariable Long userId, @PathVariable Long resultType,
                         @RequestParam(value="date")
                         @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date) {
 
         QResult result = QResult.result;
         JPQLQuery query = new JPAQuery (entityManager);
 
-        List<Result> results = query
+        List<Timestamp> results = query
                 .from(result)
                 .where(result.user.id.eq(userId)
                         .and(result.date.month().eq(date.getMonthValue()))
                         .and(result.date.year().eq(date.getYear()))
                         .and(result.resultType.eq(resultType)))
                 .orderBy(result.date.asc())
-                .list(result);
+                .groupBy(result.date.dayOfMonth())
+                .list(result.date)
+                .stream()
+                .map(localDateTime -> Timestamp.valueOf(localDateTime))
+                .collect(toList());
 
-        Map finalResults = results.stream()
-                .collect(groupingBy(Result::getDate,
-                        TreeMap::new,
-                        averagingLong(Result::getValue)
-                        ));
+//        Map finalResults = results.stream()
+//                .collect(groupingBy(Result::getDate,
+//                        TreeMap::new,
+//                        averagingLong(Result::getValue)
+//                        ));
 
-        return finalResults;
+        return results;
     }
 
     @RequestMapping("/getResultsDetails/{userId}/{resultType}")
     @ResponseBody
-    public List resultsType(@PathVariable Long userId, @PathVariable Long resultType,
+    public Map resultsType(@PathVariable Long userId, @PathVariable Long resultType,
                             @RequestParam(value="date")
                             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date) {
 
         QResult result = QResult.result;
         JPQLQuery query = new JPAQuery (entityManager);
 
-        List<Result> results = query
+        return query
                 .from(result)
                 .where(result.user.id.eq(userId)
                         .and(result.date.dayOfMonth().eq(date.getDayOfMonth()))
                         .and(result.resultType.eq(resultType)))
                 .orderBy(result.date.asc())
-                .list(result);
-
-        return results;
+                .list(result)
+                .stream().collect(
+                    toMap(x -> Timestamp.valueOf(x.getDate()), Result::getValue, (v1, v2) -> v1, TreeMap::new));
     }
 }
