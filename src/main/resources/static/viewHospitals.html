@@ -1,0 +1,40 @@
+<div ng-controller="viewHospitalsController" class="hospital-panel">
+    <div class="hospital-list">
+        <table>
+            <thead>
+            <tr>
+                <th></th>
+                <th>Nazwa</th>
+                <th>Kraj</th>
+                <th>Adres</th>
+            </tr>
+            </thead>
+            <tr ng-repeat="hosp in hospitalsSliced" class="user-info">
+
+                <td>
+                    <i class="fa fa-home" aria-hidden="true"></i>
+                </td>
+
+                <td>
+                    {{ hosp.name}}
+                </td>
+
+                <td>
+                    {{ hosp.country }}
+                </td>
+
+                <td>
+                    {{ hosp.adress + " " + hosp.city }}
+                </td>
+
+                <td class="close-icon">
+                    <span ng-click="deleteHospital(hosp.id)"><i class="fa fa-close fa-2x" aria-hidden="true"></i></span>
+                </td>
+
+            </tr>
+        </table>
+    </div>
+
+    <ul uib-pagination items-per-page="10" total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"
+        next-text="Następna" previous-text="Poprzednia"></ul>
+</div>

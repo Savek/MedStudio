@@ -12,6 +12,8 @@ import com.mysema.query.jpa.JPQLQuery;
 import com.mysema.query.jpa.hibernate.HibernateSubQuery;
 import com.mysema.query.jpa.hibernate.HibernateUpdateClause;
 import com.mysema.query.jpa.impl.JPAQuery;
+import org.hibernate.LobHelper;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.annotations.SQLInsert;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.io.IOException;
 import java.security.Principal;
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -96,20 +99,27 @@ public class UserController {
     public User updateUser(@RequestBody User user) {
 
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String hashedPassword = passwordEncoder.encode(user.getPassword());
-        user.setPassword(hashedPassword);
+        User us = repo.findOne(user.getId());
+        if (!us.getPassword().equals(user.getPassword())) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
 
         QUser queryUser = QUser.user;
+//        System.out.println(user.toString());
+//
+//        Session session = sessionFactory.openSession();
+//
+//        new HibernateUpdateClause(session, queryUser)
+//                .where(queryUser.id.eq(user.getId()))
+//                .set(queryUser.name, user.getName())
+//                .set(queryUser.surname, user.getSurname())
+//                .set(queryUser.image, user.getImage())
+//                .set(queryUser.email, user.getEmail())
+//                .execute();
+//
+//        return repo.findByLogin(user.getLogin());
 
-        new HibernateUpdateClause(sessionFactory.openSession(), queryUser)
-                .where(queryUser.id.eq(user.getId()))
-                .set(queryUser.name, user.getName())
-                .set(queryUser.surname, user.getSurname())
-                //.set(queryUser.image, user.getImage())
-                .set(queryUser.email, user.getEmail())
-                .execute();
-
-        return repo.findByLogin(user.getLogin());
+        return repo.save(user);
     }
 
     @RequestMapping("/getPatients/{userId}")

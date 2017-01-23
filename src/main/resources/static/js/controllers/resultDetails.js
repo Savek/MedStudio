@@ -20,7 +20,7 @@ angular
                         type: 'linear',
                         display: true,
                         position: 'left'
-                    },
+                    }
                 ]
             }
         };
@@ -40,11 +40,41 @@ angular
 
                     $scope.resultsData = Object.keys($scope.resultsDataAll).slice(($scope.currentPage - 1) * 10, $scope.currentPage * 10);
                     $scope.totalItems = Object.keys($scope.resultsDataAll).length;
-                    angular.forEach($scope.resultsData, function(key) {
-                        $scope.labels.push($filter('date')(new Date(key), "HH:mm:ss"));
-                        dataTemp.push($scope.resultsDataAll[key]);
-                    });
-                    $scope.data.push(dataTemp);
+
+                    if ($routeParams.resultType == RESULT_TYPES.pressure) {
+
+                        $scope.colors = ['#58a554', '#C2639D'];
+                        $scope.options = {
+                            scales: {
+                                yAxes: [
+                                    {
+                                        id: 'y-axis-1',
+                                        type: 'linear',
+                                        display: true,
+                                        position: 'left'
+                                    }
+                                ]
+                            },
+                            legend: {display: true}
+                        };
+
+                        $scope.series = ['Ciśnienie skurczowe', 'Ciśnienie rozkurczowe'];
+                        var dataTemp2 = [];
+                        angular.forEach($scope.resultsData, function(key) {
+                            $scope.labels.push($filter('date')(new Date(key), "HH:mm:ss"));
+                            dataTemp.push($scope.resultsDataAll[key].split('/')[0]);
+                            dataTemp2.push($scope.resultsDataAll[key].split('/')[1]);
+                        });
+                        $scope.data.push(dataTemp);
+                        $scope.data.push(dataTemp2);
+
+                    } else {
+                        angular.forEach($scope.resultsData, function(key) {
+                            $scope.labels.push($filter('date')(new Date(key), "HH:mm:ss"));
+                            dataTemp.push($scope.resultsDataAll[key]);
+                        });
+                        $scope.data.push(dataTemp);
+                    }
                 });
         };
         $scope.chart();

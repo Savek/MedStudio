@@ -1,5 +1,6 @@
 package com.medstudio.models.entity;
 
+import lombok.Data;
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import java.time.LocalDateTime;
  */
 @Entity
 @Table(name = "config")
+@Data
 public class Config {
 
     @Id
@@ -18,9 +20,9 @@ public class Config {
     @OneToOne
     @JoinColumn(name="user_id", referencedColumnName="id")
     private User user;
-    private Integer temperature_interval;
-    private Integer preasure_interval;
-    private Integer pulse_interval;
+    private Long temperature_interval;
+    private Long preasure_interval;
+    private Long pulse_interval;
 
     @Convert(converter = Jsr310JpaConverters.LocalDateTimeConverter.class)
     private LocalDateTime start_time;

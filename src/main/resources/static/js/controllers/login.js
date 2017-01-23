@@ -2,11 +2,12 @@
 angular
     .module('main')
     .controller('loginController',
-        function($rootScope, $http, $location, AuthService) {
+        function($rootScope, $scope, $http, $location, AuthService) {
 
             $rootScope.isNavCollapsed = true;
             $rootScope.isAuthenticated = AuthService.isAuthenticated();
 
+            $scope.succes = null;
             var self = this;
 
             self.credentials = {};
@@ -18,7 +19,9 @@ angular
                         if ($rootScope.isAuthenticated) {
                             $location.path("/");
                         }
-                });
+                    }, function() {
+                        $scope.succes = false;
+                    });
             };
 
             AuthService.login();
@@ -30,6 +33,7 @@ angular
                         $rootScope.isAuthenticated = AuthService.isAuthenticated();
                         $location.path("/");
                     })
-            }
+            };
+
         }
     );

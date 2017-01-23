@@ -27,7 +27,7 @@ import java.util.Date;
     private User user;
 
     private Long resultType;
-    private Long value;
+    private String value;
 
     @Convert(converter = Jsr310JpaConverters.LocalDateTimeConverter.class)
     private LocalDateTime date;

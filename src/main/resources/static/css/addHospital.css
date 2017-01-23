@@ -1,0 +1,24 @@
+div.add-hospital {
+    text-align: center;
+    padding-top: 60px;
+}
+
+div.add-hospital .input-group {
+    margin: 5px auto;
+    width: 60%;
+}
+
+div.add-hospital .input-group-addon {
+    width: 25%;
+}
+
+div.add-hospital button {
+    background-color: #58a554;
+    color: #fff;
+    margin-top: 40px;
+}
+
+div.add-hospital button:hover, div.add-hospital button:active, div.add-hospital button:focus {
+    background-color: #64b160;
+    color: #fff;
+}

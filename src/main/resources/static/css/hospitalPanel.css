@@ -1,0 +1,82 @@
+div.hospital-panel {
+    text-align: center;
+}
+
+div.hospital-panel span.user-info {
+    padding: 10px 20px;
+    display: block;
+}
+
+div.hospital-panel div.hospital-list {
+    height: 400px;
+}
+
+div.hospital-panel .pagination > li > a {
+    color: #ccc;
+}
+
+div.hospital-panel .pagination .active a{
+    background-color: #58a554;
+    border-color: #ccc;
+}
+
+div.hospital-panel table {
+    margin: 0 auto;
+    width: 100%;
+}
+
+div.hospital-panel table tr {
+    border-bottom: 1px solid #ccc;
+}
+
+div.hospital-panel table tr th {
+    text-align: center;
+}
+
+div.hospital-panel table tr:last-child {
+    border-bottom: none;
+}
+
+div.hospital-panel tr td, div.hospital-panel tr th{
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+div.hospital-panel table tr td:nth-child(1), div.hospital-panel table tr th:nth-child(1) {
+    width: 10%;
+}
+
+div.hospital-panel table tr td:nth-child(2), div.hospital-panel table tr th:nth-child(2) {
+    width: 40%;
+}
+
+div.hospital-panel table tr td:nth-child(3), div.hospital-panel table tr th:nth-child(3) {
+    width: 10%;
+}
+
+div.hospital-panel table tr td:nth-child(4), div.hospital-panel table tr th:nth-child(4) {
+    width: 30%;
+}
+
+div.hospital-panel table tr td:nth-child(5), div.hospital-panel table tr th:nth-child(5) {
+    width: 10%;
+}
+
+div.hospital-panel table tr td.close-icon span {
+    color: red;
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+div.hospital-panel table tr td.close-icon span:hover {
+    opacity: 1;
+}
+
+div.hospital-panel table tr td.view a {
+    color: #58a554;
+    opacity: 0.7;
+}
+
+div.hospital-panel table tr td.view a:hover {
+    opacity: 1;
+}

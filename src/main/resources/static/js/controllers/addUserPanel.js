@@ -17,14 +17,12 @@ angular
         $scope.addNewUser = function() {
 
             var data = $scope.newUser;
-
-            $http.post('/addUserToDB', data).then(function () {
-                $scope.succes = true;
-            }, function () {
-                $scope.succes = false;
-            });
+            if ($scope.newUserForm.$valid) {
+                $http.post('/addUserToDB', data).then(function () {
+                    $scope.succes = true;
+                }, function () {
+                    $scope.succes = false;
+                });
+            }
         };
-
-
-
     });

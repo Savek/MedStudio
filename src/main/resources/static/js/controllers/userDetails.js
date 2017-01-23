@@ -21,10 +21,11 @@ angular
 
         $scope.userUpdateSucess = null;
 
-        $scope.update = function (updateUser) {
+        $scope.updateUser = function () {
 
+            var data = $scope.userUpdate;
             $http
-                .post('/updateUser', updateUser)
+                .post('/updateUser', data)
                 .then(function () {
                     $scope.user = angular.copy($scope.userUpdate);
                     $scope.userUpdateSucess = true;

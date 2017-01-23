@@ -39,6 +39,10 @@
     <script src="js/controllers/addUserPanel.js"></script>
     <link rel="stylesheet" href="css/addUserPanel.css">
     <link rel="stylesheet" href="css/result.css">
+    <script src="js/controllers/addHospital.js"></script>
+    <script src="js/controllers/hospitalsPanel.js"></script>
+    <link rel="stylesheet" href="css/hospitalPanel.css">
+    <link rel="stylesheet" href="css/addHospital.css">
 
 
 </head>
@@ -50,15 +54,15 @@
         MedStudio
     </div>
     <div class="logged-header col-md-10">
-            <span class="text-capitalize" ng-change="actualPage" ng-model="actualPage">
-                {{ actualPage }}
+            <span class="text-capitalize">
+                <a class="btn" href="" ng-click="backArrow()"> <i class="fa fa-backward fa-2" aria-hidden="true"></i>Cofnij</a>
             </span>
         <ul class="nav navbar-top-links navbar-right">
             <li class="home">
                 <a href="/index.html"><i class="fa fa-home" aria-hidden="true"></i></a>
             </li>
-            <li class="config">
-                <i class="fa fa-gear" aria-hidden="true"></i>
+            <li ng-if ="isPatient" class="config">
+                <a href="#/userDetails"><i class="fa fa-gear" aria-hidden="true"></i></a>
             </li>
             <li class="user-name">
                 <a href="#/userDetails">{{ user.name }}</a>
@@ -67,7 +71,7 @@
                 <img src="data:image/png;base64,{{ user.image }}">
             </li>
             <li class="logout">
-                <span ng-click="logout()"><i class="fa fa-power-off fa-2x" aria-hidden="true"></i></span>
+                <a href="" ng-click="logout()"><i class="fa fa-power-off fa-2x" aria-hidden="true"></i></a>
             </li>
         </ul>
     </div>
@@ -90,6 +94,12 @@
             </li>
             <li ng-if ="isAdmin">
                 <a href="#/usersPanel"><i class="fa fa-list" aria-hidden="true"></i> Przeglądaj Użytkowników  </a>
+            </li>
+            <li ng-if ="isAdmin">
+                <a href="#/addHospital"><i class="fa fa-home" aria-hidden="true"></i> Dodaj Szpital  </a>
+            </li>
+            <li ng-if ="isAdmin">
+                <a href="#/hospitalsPanel"><i class="fa fa-list" aria-hidden="true"></i> Przeglądaj Szpitale  </a>
             </li>
         </ul>
     </div>

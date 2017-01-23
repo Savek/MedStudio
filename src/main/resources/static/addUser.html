@@ -10,27 +10,27 @@
         <div class="col-md-6">
             <div class="input-group">
                 <span class="input-group-addon" id="basic-addon1">Imię</span>
-                <input type="text" class="form-control" aria-describedby="basic-addon1" ng-model="newUser.name">
+                <input type="text" class="form-control" aria-describedby="basic-addon1" ng-model="newUser.name" required>
             </div>
 
             <div class="input-group">
                 <span class="input-group-addon" id="basic-addon2">Nazwisko</span>
-                <input type="text" class="form-control" aria-describedby="basic-addon2" ng-model="newUser.surname">
+                <input type="text" class="form-control" aria-describedby="basic-addon2" ng-model="newUser.surname" required>
             </div>
 
             <div class="input-group">
                 <span class="input-group-addon" id="basic-addon3">Email</span>
-                <input type="text" class="form-control" aria-describedby="basic-addon3" ng-model="newUser.email">
+                <input type="email" class="form-control" aria-describedby="basic-addon3" ng-model="newUser.email" required>
             </div>
 
             <div class="input-group">
                 <span class="input-group-addon" id="basic-addon4">Login</span>
-                <input type="text" class="form-control" aria-describedby="basic-addon4" ng-model="newUser.login">
+                <input type="text" class="form-control" aria-describedby="basic-addon4" ng-model="newUser.login" required>
             </div>
 
             <div class="input-group">
                 <span class="input-group-addon" id="basic-addon5">Hasło</span>
-                <input type="password" class="form-control" aria-describedby="basic-addon5" ng-model="newUser.password">
+                <input type="password" class="form-control" aria-describedby="basic-addon5" ng-model="newUser.password"  required>
             </div>
         </div>
 

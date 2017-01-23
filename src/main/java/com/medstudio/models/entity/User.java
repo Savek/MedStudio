@@ -24,6 +24,7 @@ import java.util.*;
     private String password;
     private String email;
     private Boolean enabled;
+
     @Lob
     @Column(columnDefinition="blob")
     private byte[] image;

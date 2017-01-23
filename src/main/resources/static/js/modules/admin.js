@@ -11,27 +11,36 @@ angular
             $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
             $routeProvider.when('/userDetails/:userId?', {
-                templateUrl: 'userDetails.html',
+                templateUrl: 'userDetails.html'
             }).when('/results/:userId/:resultType', {
-                templateUrl: 'result.html',
+                templateUrl: 'result.html'
             }).when('/resultDetails/:userId/:resultType/:date', {
-                templateUrl: 'resultsDetails.html',
+                templateUrl: 'resultsDetails.html'
             }).when('/doctorPanel/:userId', {
-                templateUrl: 'doctorPanel.html',
+                templateUrl: 'doctorPanel.html'
             }).when('/usersPanel', {
-                templateUrl: 'viewUsers.html',
+                templateUrl: 'viewUsers.html'
             }).when('/addUser', {
-                templateUrl: 'addUser.html',
+                templateUrl: 'addUser.html'
+            }).when('/addHospital', {
+                templateUrl: 'addHospital.html'
+            }).when('/hospitalsPanel', {
+                templateUrl: 'viewHospitals.html'
             }).otherwise('/');
         }
     )
     .controller('adminController',
-        function ($scope, $http, $location, AuthService, RESULT_TYPES) {
+        function ($rootScope, $scope, $http, $location, $window, AuthService, RESULT_TYPES) {
 
             $scope.RESULT_TYPES = RESULT_TYPES;
 
+            $scope.backArrow = function(){
+                window.history.back();
+            };
+
             $scope.logout = function () {
                 AuthService.logout();
+                $window.location.href = '/index.html';
             };
 
             $http.get('/userInfo').then(function (response) {

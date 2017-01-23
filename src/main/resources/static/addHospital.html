@@ -1,0 +1,42 @@
+<div ng-controller="hospitalController" class="add-hospital">
+    <div ng-show="succes == true" class="alert alert-success">
+        Dodano szpital
+    </div>
+    <div ng-show="succes == false" class="alert alert-danger">
+        Wystąpił błąd!
+    </div>
+    <form name="newHospital" ng-submit="addHospital()">
+
+        <div class="col-md-12">
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">Nazwa</span>
+                <input type="text" class="form-control" aria-describedby="basic-addon1" ng-model="newHospital.name" required>
+            </div>
+
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon2">Adres</span>
+                <input type="text" class="form-control" aria-describedby="basic-addon2" ng-model="newHospital.adress" required>
+            </div>
+
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon3">Kraj</span>
+                <input type="text" class="form-control" aria-describedby="basic-addon3" ng-model="newHospital.country" required>
+            </div>
+
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon4">Miasto</span>
+                <input type="text" class="form-control" aria-describedby="basic-addon4" ng-model="newHospital.city" required>
+            </div>
+
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon5">Kod pocztowy</span>
+                <input type="text" class="form-control" aria-describedby="basic-addon5" ng-model="newHospital.passCode" required>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <button type="submit" class="btn btn-default">Dodaj Szpital</button>
+        </div>
+
+    </form>
+</div>

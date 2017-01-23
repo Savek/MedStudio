@@ -8,7 +8,7 @@
     <div ng-show="userUpdateSucess == false" class="alert alert-danger">
         Wystąpił błąd!
     </div>
-    <form>
+    <form name="userDetailsForm" ng-submit="updateUser()">
         <div class="col-md-6 userPhoto">
             <img id="userDetailsAvatar" src="data:image/png;base64,{{ userUpdate.image }}">
 
@@ -19,25 +19,25 @@
 
                 <div class="input-group">
                     <span class="input-group-addon" id="basic-addon1">Imię</span>
-                    <input ng-disabled="!myProfile && !isAdmin" type="text" class="form-control" value="{{ userUpdate.name }}" aria-describedby="basic-addon1" ng-model="userUpdate.name">
+                    <input ng-disabled="!myProfile && !isAdmin" type="text" class="form-control" value="{{ userUpdate.name }}" aria-describedby="basic-addon1" ng-model="userUpdate.name" required>
                 </div>
 
                 <div class="input-group">
                     <span class="input-group-addon" id="basic-addon2">Nazwisko</span>
-                    <input ng-disabled="!myProfile && !isAdmin" type="text" class="form-control" value="{{ userUpdate.surname }}" aria-describedby="basic-addon2" ng-model="userUpdate.surname">
+                    <input ng-disabled="!myProfile && !isAdmin" type="text" class="form-control" value="{{ userUpdate.surname }}" aria-describedby="basic-addon2" ng-model="userUpdate.surname" required>
                 </div>
 
                 <div class="input-group">
                     <span class="input-group-addon" id="basic-addon3">Email</span>
-                    <input ng-disabled="!myProfile && !isAdmin" type="text" class="form-control" value="{{ userUpdate.email }}" aria-describedby="basic-addon3" ng-model="userUpdate.email">
+                    <input ng-disabled="!myProfile && !isAdmin" type="text" class="form-control" value="{{ userUpdate.email }}" aria-describedby="basic-addon3" ng-model="userUpdate.email" required>
                 </div>
 
                 <div class="input-group">
                     <span class="input-group-addon" id="basic-addon4">Hasło</span>
-                    <input ng-disabled="!myProfile && !isAdmin" type="password" class="form-control" value="{{ userUpdate.password }}" aria-describedby="basic-addon4" ng-model="userUpdate.password">
+                    <input ng-disabled="!myProfile && !isAdmin" type="password" class="form-control" value="{{ userUpdate.password }}" aria-describedby="basic-addon4" ng-model="userUpdate.password" required>
                 </div>
 
-                <button ng-if="myProfile || isAdmin" type="submit" class="btn btn-default" ng-click="update(userUpdate)">Submit</button>
+                <button ng-if="myProfile || isAdmin" type="submit" class="btn btn-default">Zapisz</button>
         </div>
 
         <div class="hospitals col-md-12">

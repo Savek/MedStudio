@@ -1,11 +1,10 @@
 <link rel="stylesheet" href="css/login.css">
 
-<div class="alert alert-danger" ng-show="controller.error">
-    There was a problem logging in. Please try again.
-</div>
 <div class="login-form shadow-div">
+    <div ng-show="succes == false" class="alert alert-danger">
+        Wystąpił błąd!
+    </div>
     <h3>Login</h3>
-
     <form role="form" ng-submit="controller.login()">
         <input type="text" placeholder="Login"
                class="form-control input-top" id="username" name="username" ng-model="controller.credentials.username"/>

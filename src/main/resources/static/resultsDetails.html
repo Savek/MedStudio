@@ -14,16 +14,15 @@
                 <td>{{ resultsDataAll[key] }}</td>
             </tr>
         </table>
+
+        <ul uib-pagination items-per-page="10" total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"
+            next-text="Następna" previous-text="Poprzednia"></ul>
     </div>
 
     <div class="chart col-md-8">
-        <canvas id="line" height="70" class="chart chart-line" chart-data="data"
+        <canvas id="line" height="200" class="chart chart-line" chart-data="data"
                 chart-labels="labels" chart-series="series" chart-options="options"
                 chart-dataset-override="datasetOverride" chart-colors="colors">
         </canvas>
-    </div>
-
-    <div class="chart col-md-12">
-        <ul uib-pagination items-per-page="10" total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"></ul>
     </div>
 </div>
