@@ -104,21 +104,6 @@ public class UserController {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
         }
 
-        QUser queryUser = QUser.user;
-//        System.out.println(user.toString());
-//
-//        Session session = sessionFactory.openSession();
-//
-//        new HibernateUpdateClause(session, queryUser)
-//                .where(queryUser.id.eq(user.getId()))
-//                .set(queryUser.name, user.getName())
-//                .set(queryUser.surname, user.getSurname())
-//                .set(queryUser.image, user.getImage())
-//                .set(queryUser.email, user.getEmail())
-//                .execute();
-//
-//        return repo.findByLogin(user.getLogin());
-
         return repo.save(user);
     }
 
@@ -129,15 +114,13 @@ public class UserController {
         QUser user = QUser.user;
         JPQLQuery query = new JPAQuery (entityManager);
 
-        List<User> patients = query
+        return query
                 .from(user)
                 .where(user.hospital.in(new HibernateSubQuery().from(user).where(user.id.eq(userId)).list(user.hospital)))
                 .list(user)
                 .stream()
                 .filter(user1 -> user1.getRole().getRole().equals("ROLE_PATIENT"))
                 .collect(Collectors.toList());
-
-        return patients;
     }
 
     @RequestMapping("/deleteUserFromDB/{userId}")
@@ -189,7 +172,7 @@ public class UserController {
 
         try {
             Map<String, String> jsonInfo = mapper.readValue(user, new TypeReference<Map<String, String>>(){});
-            System.out.println(jsonInfo.toString());
+
             User newUser = new User();
             newUser.setName(jsonInfo.get("name"));
             newUser.setSurname(jsonInfo.get("surname"));

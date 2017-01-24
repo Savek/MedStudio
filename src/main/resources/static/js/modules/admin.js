@@ -10,7 +10,9 @@ angular
 
             $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
-            $routeProvider.when('/userDetails/:userId?', {
+            $routeProvider.when('/', {
+                templateUrl: 'homeAdmin.html'
+            }).when('/userDetails/:userId?', {
                 templateUrl: 'userDetails.html'
             }).when('/results/:userId/:resultType', {
                 templateUrl: 'result.html'
@@ -38,6 +40,47 @@ angular
                 window.history.back();
             };
 
+            $scope.$on('$routeChangeStart', function(next, current) {
+
+                var str = $location.url();
+                switch (true) {
+                    case /.*addUser.*/.test(str):
+                        $scope.actualPage = "Dodaj Użytkownika";
+                        break;
+                    case /.*usersPanel.*/.test(str):
+                        $scope.actualPage = "Przeglądaj Użytkowników";
+                        break;
+                    case /.*addHospital.*/.test(str):
+                        $scope.actualPage = "Dodaj Szpital";
+                        break;
+                    case /.*hospitalsPanel.*/.test(str):
+                        $scope.actualPage = "Przeglądaj Szpitale";
+                        break;
+                    case /.*hospitalsPanel.*/.test(str):
+                        $scope.actualPage = "Przeglądaj Szpitale";
+                        break;
+                    case /.*userDetails$/.test(str):
+                        $scope.actualPage = "Profil";
+                        break;
+                    case /.*userDetails.*/.test(str):
+                        $scope.actualPage = "Przeglądaj Użytkownika";
+                        break;
+                    case /.*doctorPanel.*/.test(str):
+                        $scope.actualPage = "Przeglądaj Pacjentów";
+                        break;
+                    case /.*results\/[0-9]*\/0$/.test(str):
+                        $scope.actualPage = "Wyniki ciśnienia";
+                        break;
+                    case /.*results\/[0-9]*\/1$/.test(str):
+                        $scope.actualPage = "Wyniki temperatury";
+                        break;
+                    case /.*results\/[0-9]*\/2$/.test(str):
+                        $scope.actualPage = "Wyniki pulsu";
+                        break;
+                }
+            });
+
+
             $scope.logout = function () {
                 AuthService.logout();
                 $window.location.href = '/index.html';
@@ -60,7 +103,6 @@ angular
                     if ($scope.user.role.role === "ROLE_PATIENT") {
                         $scope.isPatient = true;
                     }
-
                 }
             }, function () {
                 $location.path("/");

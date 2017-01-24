@@ -15,14 +15,20 @@ import java.util.*;
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private long id;
+    private Long id;
 
+    @NotNull
     private String name;
+    @NotNull
     private String surname;
     @Column(unique = true)
+    @NotNull
     private String login;
+    @NotNull
     private String password;
+    @NotNull
     private String email;
+    @NotNull
     private Boolean enabled;
 
     @Lob

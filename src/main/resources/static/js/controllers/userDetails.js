@@ -47,4 +47,24 @@ angular
             reader.readAsDataURL(file);
         };
 
+        if (!angular.isUndefined($routeParams.userId)) {
+            $http.get("/getConfig/" + $routeParams.userId).then(function (response) {
+
+                $scope.userConfig = response.data[0];
+                $scope.userConfig.user = $scope.user;
+            });
+        }
+
+        $scope.updateConfig = function () {
+
+            var data = $scope.userConfig;
+            $http
+                .post('/updateConfig', data)
+                .then(function () {
+                    $scope.userUpdateSucess = true;
+                }, function () {
+                    $scope.userUpdateSucess = false;
+                });
+        };
+
     });

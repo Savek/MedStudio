@@ -15,7 +15,7 @@ import java.util.Date;
  */
 
 @Entity
-@Table(name = "results")
+@Table(name = "result")
 @Data public class Result {
 
     @Id
@@ -23,12 +23,15 @@ import java.util.Date;
     private Long id;
 
     @ManyToOne
+    @NotNull
     @JoinColumn(name="user_id", referencedColumnName="id")
     private User user;
-
+    @NotNull
     private Long resultType;
+    @NotNull
     private String value;
 
+    @NotNull
     @Convert(converter = Jsr310JpaConverters.LocalDateTimeConverter.class)
     private LocalDateTime date;
 }

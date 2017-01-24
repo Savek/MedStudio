@@ -4,6 +4,7 @@ import lombok.Data;
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 /**
@@ -19,13 +20,18 @@ public class Config {
     private Long id;
     @OneToOne
     @JoinColumn(name="user_id", referencedColumnName="id")
+    @NotNull
     private User user;
+    @NotNull
     private Long temperature_interval;
-    private Long preasure_interval;
+    @NotNull
+    private Long temperature_counter;
+    @NotNull
+    private Long pressure_interval;
+    @NotNull
+    private Long pressure_counter;
+    @NotNull
     private Long pulse_interval;
-
-    @Convert(converter = Jsr310JpaConverters.LocalDateTimeConverter.class)
-    private LocalDateTime start_time;
-    @Convert(converter = Jsr310JpaConverters.LocalDateTimeConverter.class)
-    private LocalDateTime end_time;
+    @NotNull
+    private Long pulse_counter;
 }

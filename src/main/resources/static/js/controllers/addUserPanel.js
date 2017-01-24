@@ -1,7 +1,7 @@
 
 angular
     .module('admin')
-    .controller('addUserPanelController', function ($scope, $http, $routeParams) {
+    .controller('addUserPanelController', function ($scope, $http) {
 
 
         $http.get('/getHospitals').then(function (response) {

@@ -20,9 +20,13 @@ div.logged-menu-firm {
 }
 
 div.logged-header {
-    padding-top: 30px;
+    padding-top: 25px;
     height: 70px;
     border-bottom: 1px solid #2B3033;
+}
+
+div.logged-header span a.btn.btn-default{
+    padding: 0px 12px;
 }
 
 div.logged-header span {

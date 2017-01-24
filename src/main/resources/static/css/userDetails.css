@@ -10,8 +10,37 @@ div.userDetails {
     padding: 35px;
 }
 
+li.uib-tab a {
+    color: #58a554;
+}
+
 form {
     text-align: center;
+    margin-top: 30px;
+}
+
+form.config-form .input-group {
+    float: left;
+    margin-top: 20px;
+}
+
+form.config-form .input-group.counter {
+    float: right;
+}
+
+form.config-form span.input-group-addon {
+    width: 45%;
+}
+
+form.config-form button {
+    background-color: #58a554;
+    color: #fff;
+    margin-top: 40px;
+}
+
+form.config-form button:hover, form.config-form button:active, form.config-form button:focus {
+    background-color: #64b160;
+    color: #fff;
 }
 
 form input[type="file"] {

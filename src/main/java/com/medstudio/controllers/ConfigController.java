@@ -4,6 +4,7 @@ import com.medstudio.models.entity.Config;
 import com.medstudio.models.entity.Hospital;
 import com.medstudio.models.entity.QConfig;
 import com.medstudio.models.entity.QHospital;
+import com.medstudio.models.repository.ConfigRepository;
 import com.mysema.query.jpa.JPQLQuery;
 import com.mysema.query.jpa.hibernate.HibernateUpdateClause;
 import com.mysema.query.jpa.impl.JPAQuery;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,6 +26,9 @@ import java.util.List;
  */
 @Controller
 public class ConfigController {
+
+    @Autowired
+    ConfigRepository repo;
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -33,31 +38,27 @@ public class ConfigController {
 
     @RequestMapping("/getConfig/{userId}")
     @ResponseBody
-    public Config getConfigByUserId(@PathVariable Long userId) {
+    public List getConfigByUserId(@PathVariable Long userId) {
 
         QConfig config = QConfig.config;
         JPQLQuery query = new JPAQuery(entityManager);
 
-        return query
+        List res = query
                 .from(config)
                 .where(config.user.id.eq(userId))
-                .list(config)
-                .get(0);
+                .list(config);
+
+        if (res.size() > 0) {
+            return res;
+        } else {
+            return new ArrayList<Config>() {{add(new Config());}};
+        }
     }
 
     @RequestMapping("/updateConfig")
     @ResponseBody
     public void updateConfig(@RequestBody Config config) {
 
-        QConfig queryConfig = QConfig.config;
-
-        new HibernateUpdateClause(sessionFactory.openSession(), queryConfig)
-                .where(queryConfig.id.eq(config.getId()))
-                .set(queryConfig.preasure_interval, config.getPreasure_interval())
-                .set(queryConfig.pulse_interval, config.getPulse_interval())
-                .set(queryConfig.temperature_interval, config.getTemperature_interval())
-                .set(queryConfig.start_time, config.getStart_time())
-                .set(queryConfig.end_time, config.getEnd_time())
-                .execute();
+        repo.save(config);
     }
 }
