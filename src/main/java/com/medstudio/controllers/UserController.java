@@ -178,7 +178,10 @@ public class UserController {
             newUser.setSurname(jsonInfo.get("surname"));
             newUser.setEmail(jsonInfo.get("email"));
             newUser.setLogin(jsonInfo.get("login"));
-            newUser.setPassword(jsonInfo.get("password"));
+
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            newUser.setPassword(passwordEncoder.encode(jsonInfo.get("password")));
+
             newUser.setEnabled(Boolean.valueOf(jsonInfo.get("enabled")));
 
             List<Hospital> hosp;

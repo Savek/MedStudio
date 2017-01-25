@@ -19,6 +19,7 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
+import org.springframework.web.filter.CharacterEncodingFilter;
 
 import javax.sql.DataSource;
 
@@ -68,6 +69,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .httpBasic()
             .and()
                 .authorizeRequests()
+                .antMatchers("/deleteUserFromDB/**", "/addUserToDB", "/removeHospital/**", "/addHospitalToDB", "/updateConfig", "/getConfig/**").hasRole("ADMIN")
+                .antMatchers("/getPatients/**").hasRole("DOC")
                 .antMatchers("/index.html", "/home.html", "/login.html","/js/*", "/js/*/*", "/", "/css/*", "/img/*", "/fonts/*", "/templates/*").permitAll()
                 .anyRequest().fullyAuthenticated()
             .and()
@@ -81,7 +84,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 //.csrf().disable();
             .and()
                 .addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class);
-
     }
 
     private CsrfTokenRepository csrfTokenRepository() {

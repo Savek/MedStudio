@@ -22,7 +22,7 @@ import java.util.Date;
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @NotNull
     @JoinColumn(name="user_id", referencedColumnName="id")
     private User user;

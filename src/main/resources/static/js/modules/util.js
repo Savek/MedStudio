@@ -2,7 +2,7 @@
  * Created by Savek on 2017-01-14.
  */
 angular
-    .module('util', ['ngCookies'])
+    .module('util', [])
     .factory('AuthService', function ($http, $location, $route, Session) {
         var authService = {};
 
@@ -16,13 +16,13 @@ angular
                 .get('/user', {headers : headers})
                 .then(function (res) {
                     if (res.data.authenticated) {
-                        Session.create(res.data.name, res.data.name);
+                        Session.create(res.data.name);
                     }
                 });
         };
 
         authService.isAuthenticated = function () {
-            return !!Session.id;
+            return !!Session.userId;
         };
 
         authService.logout = function () {
@@ -36,14 +36,11 @@ angular
 
     }).service('Session', function () {
 
-        this.create = function (sessionId, userId) {
-            this.id = sessionId;
+        this.create = function (userId) {
             this.userId = userId;
         };
 
         this.destroy = function () {
-            this.id = null;
             this.userId = null;
-
         };
     });

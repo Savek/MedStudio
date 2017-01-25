@@ -39,13 +39,22 @@
                         <input ng-disabled="!myProfile && !isAdmin" type="password" class="form-control" value="{{ userUpdate.password }}" aria-describedby="basic-addon4" ng-model="userUpdate.password" required>
                     </div>
 
+                    <div ng-if="isAdmin" class="hospitals">
+                        <label id="hospitalSelect"> Szpital: </label><br>
+                        <select class="form-control hospital"
+                                ng-model="userUpdate.hospital"
+                                ng-options="hospital.name for hospital in hospitals track by hospital.id"></select>
+                        <br>
+                    </div>
+
                     <button ng-if="myProfile || isAdmin" type="submit" class="btn btn-default">Zapisz</button>
                 </div>
 
-                <div class="hospitals col-md-12">
+                <div ng-if="!isAdmin" class="hospitals col-md-12">
                     <p><i class="fa fa-home" aria-hidden="true"></i> {{user.hospital.name}}</p>
                     <p>{{user.hospital.city}}, {{user.hospital.adress}} {{user.hospital.passCode}} </p>
                 </div>
+
             </form>
 
             <div ng-show ="isDoctor && !myProfile" class="user-results col-md-12">

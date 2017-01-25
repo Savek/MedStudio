@@ -13,14 +13,14 @@ import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
 
@@ -32,9 +32,6 @@ public class HospitalController {
 
     @PersistenceContext
     private EntityManager entityManager;
-
-    @Autowired
-    private SessionFactory sessionFactory;
 
     @Autowired
     HospitalRepository repo;
@@ -57,7 +54,7 @@ public class HospitalController {
     @RequestMapping("/addHospitalToDB")
     @ResponseBody
     public void addHospital(@RequestBody Hospital hospital) {
-        System.out.println(hospital.toString());
+
         repo.save(hospital);
     }
 

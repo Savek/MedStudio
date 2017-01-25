@@ -78,4 +78,16 @@ public class ResultController {
                 .stream().collect(
                     toMap(x -> Timestamp.valueOf(x.getDate()), Result::getValue, (v1, v2) -> v1, TreeMap::new));
     }
+
+    @RequestMapping("/getResultsCount")
+    @ResponseBody
+    public Long resultsCount() {
+
+        QResult result = QResult.result;
+        JPQLQuery query = new JPAQuery(entityManager);
+
+        return query
+                .from(result)
+                .count();
+    }
 }

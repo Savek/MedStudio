@@ -16,6 +16,7 @@ angular
                 $scope.authenticated = true;
                 $scope.user = response.data;
                 $scope.userUpdate = angular.copy(response.data);
+
             }
         });
 
@@ -66,5 +67,9 @@ angular
                     $scope.userUpdateSucess = false;
                 });
         };
+
+        $http.get('/getHospitals').then(function (response) {
+            $scope.hospitals = response.data;
+        });
 
     });

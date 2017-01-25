@@ -35,11 +35,11 @@ import java.util.*;
     @Column(columnDefinition="blob")
     private byte[] image;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "hospital_id")
     private Hospital hospital;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "role_id")
     private Role role;
 }
