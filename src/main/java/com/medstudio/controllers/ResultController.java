@@ -1,5 +1,6 @@
 package com.medstudio.controllers;
 
+import com.medstudio.models.entity.User;
 import com.medstudio.models.repository.ResultRepository;
 import com.medstudio.models.entity.QResult;
 import com.medstudio.models.entity.Result;
@@ -80,5 +81,11 @@ public class ResultController {
         return query
                 .from(result)
                 .count();
+    }
+
+    @RequestMapping("/setResult")
+    public void resultsCount(@RequestBody Result result) {
+
+        repo.save(result);
     }
 }
