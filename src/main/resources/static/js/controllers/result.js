@@ -13,7 +13,6 @@ angular
             var date = new Date(day);
             date.setDate(date.getDate() + 1);
             $location.path( "/resultDetails/" + $routeParams.userId + "/" + $routeParams.resultType + "/" + date.toISOString() );
-            //$scope.$apply();
         };
 
         $scope.dt = new Date();

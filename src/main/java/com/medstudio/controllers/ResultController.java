@@ -31,19 +31,12 @@ public class ResultController {
     private EntityManager entityManager;
 
     @RequestMapping("/getResultsMonthAndYear/{userId}/{resultType}")
-    @ResponseBody
     public List results(@PathVariable Long userId, @PathVariable Long resultType,
                         @RequestParam(value="date")
                         @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date) {
 
         QResult result = QResult.result;
         JPQLQuery query = new JPAQuery (entityManager);
-
-//        Map finalResults = results.stream()
-//                .collect(groupingBy(Result::getDate,
-//                        TreeMap::new,
-//                        averagingLong(Result::getValue)
-//                        ));
 
         return query
                 .from(result)
@@ -60,7 +53,6 @@ public class ResultController {
     }
 
     @RequestMapping("/getResultsDetails/{userId}/{resultType}")
-    @ResponseBody
     public Map resultsType(@PathVariable Long userId, @PathVariable Long resultType,
                             @RequestParam(value="date")
                             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date) {
@@ -80,7 +72,6 @@ public class ResultController {
     }
 
     @RequestMapping("/getResultsCount")
-    @ResponseBody
     public Long resultsCount() {
 
         QResult result = QResult.result;

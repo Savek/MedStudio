@@ -1,9 +1,11 @@
 package com.medstudio.models.entity;
 
 import lombok.Data;
+import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 import java.util.*;
 
 /**
@@ -30,6 +32,10 @@ import java.util.*;
     private String email;
     @NotNull
     private Boolean enabled;
+
+    @Convert(converter = Jsr310JpaConverters.LocalDateTimeConverter.class)
+    @Column(columnDefinition="TIMESTAMP default CURRENT_TIMESTAMP")
+    private LocalDateTime createDate;
 
     @Lob
     @Column(columnDefinition="blob")

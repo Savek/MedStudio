@@ -8,14 +8,19 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.medstudio.models.entity.*;
 import com.medstudio.models.repository.UserRepository;
+import com.mysema.query.group.GroupBy;
 import com.mysema.query.jpa.JPQLQuery;
 import com.mysema.query.jpa.hibernate.HibernateSubQuery;
 import com.mysema.query.jpa.hibernate.HibernateUpdateClause;
 import com.mysema.query.jpa.impl.JPAQuery;
+import com.mysema.query.types.Projections;
+import com.mysema.query.types.QTuple;
+import com.mysema.query.types.expr.Wildcard;
 import org.hibernate.LobHelper;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.annotations.SQLInsert;
+import org.hibernate.criterion.Projection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
@@ -30,6 +35,7 @@ import javax.persistence.PersistenceContext;
 import java.io.IOException;
 import java.security.Principal;
 import java.sql.Blob;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -60,6 +66,33 @@ public class UserController {
             return repo.findByLogin(login);
         }
         return null;
+    }
+
+    @RequestMapping("/getUsersCounter")
+    @ResponseBody
+    public Long usersCounter() {
+
+        QUser user = QUser.user;
+        JPQLQuery query = new JPAQuery (entityManager);
+
+        return query
+                .from(user)
+                .fetchAll()
+                .count();
+    }
+
+    @RequestMapping("/getUsersLast7days")
+    @ResponseBody
+    public Map userPerDay() {
+
+        QUser user = QUser.user;
+        JPQLQuery query = new JPAQuery (entityManager);
+
+        return query
+                .from(user)
+                .where(user.createDate.after(LocalDateTime.now().minusDays(7)))
+                .groupBy(user.createDate.dayOfMonth())
+                .transform(GroupBy.groupBy(user.createDate.dayOfMonth()).as(Wildcard.count));
     }
 
     @RequestMapping("/userInfo/{userId}")

@@ -24,6 +24,7 @@ angular
 
         $scope.updateUser = function () {
 
+            $scope.userUpdate.createDate = null;
             var data = $scope.userUpdate;
             $http
                 .post('/updateUser', data)

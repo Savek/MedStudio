@@ -1,5 +1,24 @@
-dorobienie strony startowej
+<div ng-controller="adminHomePageController" class="adminHome">
+    <div class="col-md-6">
+        <div class="home-info">
+            Witamy w aplikacji MedStudio. System mając na celu ułatwienie komunikacji z systemem pomiarowym. Działająca w każdej popularnej przeglądarce aplikacja,
+            umożliwia przeglądanie wyników naszych pacjentów. Zapraszamy do korzystania :)
+        </div>
 
-<div ng-controller="adminHomePageController" class="addUserPanel">
+        <canvas id="line" height="80" class="chart chart-line" chart-data="data"
+                chart-labels="labels" chart-series="series" chart-options="options"
+                chart-dataset-override="datasetOverride" chart-colors="colors">
+        </canvas>
+        Liczba nowych kont w ciągu ostatnich 7 dni
+    </div>
 
+    <div class="col-md-6 statistic">
+        <div class="col-md-12 users">
+            <i class="fa fa-user fa-3x" aria-hidden="true"></i> Liczba użytkowników {{ userCounter }}
+        </div>
+
+        <div class="col-md-12 results">
+            <i class="fa fa-bar-chart fa-3x" aria-hidden="true"></i> Liczba pomiarów {{ resultCounter }}
+        </div>
+    </div>
 </div>
