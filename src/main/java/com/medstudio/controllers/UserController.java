@@ -16,6 +16,7 @@ import com.mysema.query.jpa.impl.JPAQuery;
 import com.mysema.query.types.Projections;
 import com.mysema.query.types.QTuple;
 import com.mysema.query.types.expr.Wildcard;
+import com.mysema.query.types.query.ListSubQuery;
 import org.hibernate.LobHelper;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -145,15 +146,16 @@ public class UserController {
     public List<User> patients(@PathVariable Long userId) {
 
         QUser user = QUser.user;
+        QRole role = QRole.role1;
         JPQLQuery query = new JPAQuery (entityManager);
 
+        ListSubQuery subQuery = new HibernateSubQuery().from(role).where(role.role.eq("ROLE_PATIENT")).list(role.id);
         return query
                 .from(user)
-                .where(user.hospital.in(new HibernateSubQuery().from(user).where(user.id.eq(userId)).list(user.hospital)))
-                .list(user)
-                .stream()
-                .filter(user1 -> user1.getRole().getRole().equals("ROLE_PATIENT"))
-                .collect(Collectors.toList());
+                .where(user.hospital.in(new HibernateSubQuery().from(user).where(user.id.eq(userId)).list(user.hospital))
+                    .and(user.role.in(subQuery))
+                )
+                .list(user);
     }
 
     @RequestMapping("/deleteUserFromDB/{userId}")

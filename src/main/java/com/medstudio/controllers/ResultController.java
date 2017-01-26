@@ -4,6 +4,7 @@ import com.medstudio.models.entity.User;
 import com.medstudio.models.repository.ResultRepository;
 import com.medstudio.models.entity.QResult;
 import com.medstudio.models.entity.Result;
+import com.medstudio.models.repository.UserRepository;
 import com.mysema.query.jpa.JPQLQuery;
 import com.mysema.query.jpa.impl.JPAQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,9 @@ public class ResultController {
 
     @Autowired
     ResultRepository repo;
+
+    @Autowired
+    UserRepository userRepo;
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -83,9 +87,16 @@ public class ResultController {
                 .count();
     }
 
-    @RequestMapping("/setResult")
-    public void resultsCount(@RequestBody Result result) {
+    @RequestMapping("/setResult/{userId}/{resultType}/{value}")
+    public void resultsCount(@PathVariable Long userId, @PathVariable Long resultType,
+                             @PathVariable String value) {
 
-        repo.save(result);
+        Result newRes = new Result();
+        newRes.setDate(LocalDateTime.now());
+        newRes.setUser(userRepo.findOne(userId));
+        newRes.setResultType(resultType);
+        newRes.setValue(value);
+
+        repo.save(newRes);
     }
 }
