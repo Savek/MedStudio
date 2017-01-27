@@ -11,10 +11,7 @@ import com.mysema.query.jpa.impl.JPAQuery;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -24,7 +21,7 @@ import java.util.List;
 /**
  * Created by Savek on 2017-01-21.
  */
-@Controller
+@RestController
 public class ConfigController {
 
     @Autowired
@@ -37,7 +34,6 @@ public class ConfigController {
     private SessionFactory sessionFactory;
 
     @RequestMapping("/getConfig/{userId}")
-    @ResponseBody
     public List getConfigByUserId(@PathVariable Long userId) {
 
         QConfig config = QConfig.config;
@@ -56,7 +52,6 @@ public class ConfigController {
     }
 
     @RequestMapping("/updateConfig")
-    @ResponseBody
     public void updateConfig(@RequestBody Config config) {
 
         repo.save(config);

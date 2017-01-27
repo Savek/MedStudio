@@ -9,6 +9,7 @@ import com.mysema.query.jpa.JPQLQuery;
 import com.mysema.query.jpa.impl.JPAQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
@@ -23,7 +24,7 @@ import static java.util.stream.Collectors.*;
  * Created by Savek on 2016-12-21.
  */
 
-@RestController
+@Controller
 public class ResultController {
 
     @Autowired
@@ -36,6 +37,7 @@ public class ResultController {
     private EntityManager entityManager;
 
     @RequestMapping("/getResultsMonthAndYear/{userId}/{resultType}")
+    @ResponseBody
     public List results(@PathVariable Long userId, @PathVariable Long resultType,
                         @RequestParam(value="date")
                         @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date) {
@@ -58,6 +60,7 @@ public class ResultController {
     }
 
     @RequestMapping("/getResultsDetails/{userId}/{resultType}")
+    @ResponseBody
     public Map resultsType(@PathVariable Long userId, @PathVariable Long resultType,
                             @RequestParam(value="date")
                             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime date) {
@@ -77,6 +80,7 @@ public class ResultController {
     }
 
     @RequestMapping("/getResultsCount")
+    @ResponseBody
     public Long resultsCount() {
 
         QResult result = QResult.result;
@@ -88,6 +92,7 @@ public class ResultController {
     }
 
     @RequestMapping("/setResult/{userId}/{resultType}/{value}")
+    @ResponseBody
     public void resultsCount(@PathVariable Long userId, @PathVariable Long resultType,
                              @PathVariable String value) {
 
@@ -95,7 +100,7 @@ public class ResultController {
         newRes.setDate(LocalDateTime.now());
         newRes.setUser(userRepo.findOne(userId));
         newRes.setResultType(resultType);
-        newRes.setValue(value);
+        newRes.setValue(value.replace("_", "/"));
 
         repo.save(newRes);
     }

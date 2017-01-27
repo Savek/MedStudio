@@ -69,9 +69,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .httpBasic()
             .and()
                 .authorizeRequests()
-                .antMatchers("/deleteUserFromDB/**", "/addUserToDB", "/removeHospital/**", "/addHospitalToDB", "/updateConfig", "/getConfig/**").hasRole("ADMIN")
+                .antMatchers("/deleteUserFromDB/**", "/addUserToDB", "/removeHospital/**", "/addHospitalToDB", "/updateConfig").hasRole("ADMIN")
                 .antMatchers("/getPatients/**").hasRole("DOC")
-                .antMatchers("/index.html", "/home.html", "/login.html","/js/*", "/js/*/*", "/", "/css/*", "/img/*", "/fonts/*", "/templates/*").permitAll()
+                .antMatchers("/index.html", "/home.html", "/login.html","/js/*", "/js/*/*", "/", "/css/*", "/img/*", "/fonts/*", "/templates/*", "/getConfig/**", "/setResult/**").permitAll()
                 .anyRequest().fullyAuthenticated()
             .and()
                 .formLogin()
@@ -81,6 +81,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logout()
             .and()
                 .csrf().csrfTokenRepository(csrfTokenRepository())
+                .ignoringAntMatchers("/setResult/**", "/getConfig/**")
                 //.csrf().disable();
             .and()
                 .addFilterAfter(new CsrfHeaderFilter(), CsrfFilter.class);
