@@ -23,15 +23,7 @@ public class Config {
     @NotNull
     private User user;
     @NotNull
-    private Long temperature_interval;
+    private Long measurementInterval;
     @NotNull
-    private Long temperature_counter;
-    @NotNull
-    private Long pressure_interval;
-    @NotNull
-    private Long pressure_counter;
-    @NotNull
-    private Long pulse_interval;
-    @NotNull
-    private Long pulse_counter;
+    private Long counter;
 }

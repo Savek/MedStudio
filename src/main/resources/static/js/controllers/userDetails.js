@@ -59,6 +59,7 @@ angular
 
         $scope.updateConfig = function () {
 
+            $scope.userConfig.user.createDate = null;
             var data = $scope.userConfig;
             $http
                 .post('/updateConfig', data)

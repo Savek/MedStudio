@@ -149,10 +149,15 @@ public class UserController {
         QRole role = QRole.role1;
         JPQLQuery query = new JPAQuery (entityManager);
 
-        ListSubQuery subQuery = new HibernateSubQuery().from(role).where(role.role.eq("ROLE_PATIENT")).list(role.id);
+        ListSubQuery subQuery = new HibernateSubQuery().from(role)
+                .where(role.role.eq("ROLE_PATIENT"))
+                .list(role.id);
+
         return query
                 .from(user)
-                .where(user.hospital.in(new HibernateSubQuery().from(user).where(user.id.eq(userId)).list(user.hospital))
+                .where(user.hospital.in(new HibernateSubQuery().from(user)
+                        .where(user.id.eq(userId))
+                        .list(user.hospital))
                     .and(user.role.in(subQuery))
                 )
                 .list(user);
@@ -162,7 +167,11 @@ public class UserController {
     @ResponseBody
     public void deleteUser(@PathVariable Long userId) {
 
-        repo.delete(userId);
+        User user = repo.findOne(userId);
+        user.setRole(null);
+        user.setHospital(null);
+        repo.save(user);
+        repo.delete(user);
     }
 
     @RequestMapping("/getUsers")
