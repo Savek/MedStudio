@@ -133,9 +133,11 @@ public class UserController {
     public User updateUser(@RequestBody User user) {
 
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        User us = repo.findOne(user.getId());
-        if (!us.getPassword().equals(user.getPassword())) {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        if (user.getId() != null) {
+            User us = repo.findOne(user.getId());
+            if (!us.getPassword().equals(user.getPassword())) {
+                user.setPassword(passwordEncoder.encode(user.getPassword()));
+            }
         }
 
         return repo.save(user);

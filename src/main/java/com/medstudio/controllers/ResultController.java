@@ -93,7 +93,7 @@ public class ResultController {
 
     @RequestMapping("/setResult/{userId}/{resultType}/{value}")
     @ResponseBody
-    public void resultsCount(@PathVariable Long userId, @PathVariable Long resultType,
+    public void addResult(@PathVariable Long userId, @PathVariable Long resultType,
                              @PathVariable String value) {
 
         Result newRes = new Result();
